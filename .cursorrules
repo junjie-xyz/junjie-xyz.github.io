@@ -1,0 +1,67 @@
+# Cursor Rules for ioriens.github.io
+
+## Project Overview
+This is a personal navigation website project built with static HTML and developed using Gulp for building and development.
+
+## Tech Stack
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Gulp (Build Tool)
+- Browser-sync (Development Server)
+
+## Code Standards
+
+### HTML
+- Use semantic HTML tags
+- Keep HTML structure clean and simple
+- Inline CSS and JavaScript are allowed (project characteristic)
+- Ensure all images have alt attributes
+- Use UTF-8 encoding
+
+### CSS
+- Use concise CSS selectors
+- Prioritize flexbox and grid layouts
+- Maintain responsive design
+- Use relative units (em, rem, %)
+- Avoid excessive nesting
+
+### JavaScript
+- Use ES6+ syntax
+- Keep code concise
+- Avoid global variable pollution
+- Use const and let instead of var
+
+## File Structure
+```
+src/
+├── index.html      # Main page
+├── manifest.json   # PWA configuration
+└── assets/         # Static resources
+    ├── avatar.jpg
+    ├── icons/
+    └── social-icons/
+```
+
+## Development Workflow
+- Use `pnpm run dev` to start development server
+- Use `pnpm run build` to generate production files
+- Modify files in src directory, build tools will handle automatically
+
+## Code Style
+- Use 2 spaces for indentation
+- Use single quotes
+- No semicolons at line end (JavaScript)
+- Keep code concise, avoid over-engineering
+
+## Performance Optimization
+- Use appropriate image formats and sizes
+- Minify HTML, CSS and JavaScript
+- Use CDN for external resources
+- Optimize critical rendering path
+
+## Important Notes
+- This is a simple personal website, keep code concise
+- Don't over-design or add unnecessary features
+- Keep loading speed fast
+- Ensure proper display on different devices 

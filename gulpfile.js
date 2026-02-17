@@ -8,7 +8,7 @@ const img64Html = require('gulp-img64-html')
 
 function html() {
   return gulp
-    .src('src/index.html')
+    .src('src/*.html')
     .pipe(
       img64Html({
         ignoreExternal: true // will skip http & https

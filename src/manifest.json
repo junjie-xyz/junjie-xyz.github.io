@@ -1,10 +1,10 @@
 {
-  "name": "Junjie Ding's links",
-  "short_name": "Junjie Ding",
+  "name": "Junjie's links",
+  "short_name": "Junjie",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#55c5ea",
-  "description": "Junjie's story, 丁俊杰的个人导航站",
+  "description": "Junjie's story, 俊杰的个人导航站",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",

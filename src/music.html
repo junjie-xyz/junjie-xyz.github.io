@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+    <title>Music - Junjie</title>
+    <link rel="shortcut icon" type="image/png" href="assets/avatar.jpg" />
+    <link rel="canonical" href="https://ioriens.com/music" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Junjie's music playlist, 俊杰的音乐播放列表" />
+    <meta name="author" content="Junjie" />
+    <meta name="theme-color" content="#C1D7E4" />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
+      }
+
+      body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 95%;
+      }
+
+      a {
+        color: #0076ca;
+        text-decoration: none;
+      }
+
+      .header {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 4px;
+        background-color: #55c5ea;
+        margin-bottom: 8px;
+      }
+
+      .music-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .back-link {
+        margin-top: 20px;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .back-link:hover {
+        color: #0076ca;
+      }
+    </style>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-82267837-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'UA-82267837-1')
+    </script>
+    <meta name="baidu-site-verification" content="C3WfF7hGfH" />
+  </head>
+
+  <body>
+    <div class="header">
+      <img src="assets/avatar.jpg" class="avatar" alt="avatar" />
+      <p>Junjie</p>
+    </div>
+    
+    <div class="music-container">
+      <iframe 
+        allow="autoplay *; encrypted-media *;" 
+        frameborder="0" 
+        height="450" 
+        style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
+        src="https://embed.music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E7%9A%84%E6%AD%8C%E6%9B%B2/pl.u-doU4PZD23">
+      </iframe>
+    </div>
+
+    <div class="back-link">
+      <a href="index.html">← Back to Home</a>
+    </div>
+
+    <!-- Baidu Analytics -->
+    <script>
+      var _hmt = _hmt || []
+      ;(function() {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?1e415f3a9200edffb8566fbeee4b669f'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+      })()
+    </script>
+
+    <!-- Baidu Site Report -->
+    <script>
+      ;(function() {
+        var bp = document.createElement('script')
+        var curProtocol = window.location.protocol.split(':')[0]
+        if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+        } else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+        }
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(bp, s)
+      })()
+    </script>
+  </body>
+</html> 
