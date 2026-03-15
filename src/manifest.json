@@ -4,7 +4,7 @@
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#55c5ea",
-  "description": "Junjie's story, 俊杰的个人导航站",
+  "description": "Junjie's personal links and recent listening.",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",

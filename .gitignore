@@ -1,2 +1,8 @@
 .DS_Store
 node_modules
+.trash
+.tmp
+.claude
+.agents
+.agent
+skills-lock.json

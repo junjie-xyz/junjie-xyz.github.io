@@ -7,94 +7,216 @@
     <link rel="shortcut icon" type="image/png" href="assets/avatar.jpg" />
     <link rel="canonical" href="https://ioriens.com/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Junjie's links, 俊杰的个人导航站" />
     <meta
-      name="keywords"
-      content="Junjie,俊杰,Junjie,JavaScript,俊杰,Junjie,junjie,junjie,junjie,前端,开发者,hera,小程序,Developer"
+      name="description"
+      content="Junjie's personal links for code, thoughts, photos, and recent listening."
     />
     <meta name="author" content="Junjie" />
-    <meta name="theme-color" content="#C1D7E4" />
+    <meta name="theme-color" content="#ece8df" />
     <link rel="manifest" href="manifest.json" />
     <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f0e8;
+        --bg-soft: rgba(255, 255, 255, 0.62);
+        --line: rgba(56, 45, 31, 0.14);
+        --text: #1f1a17;
+        --muted: #62584f;
+        --accent: #176b5a;
+        --accent-strong: #0f5144;
+        --shadow: 0 20px 50px rgba(42, 31, 18, 0.08);
+      }
+
       * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-        /* font-family: "Comic Sans MS", cursive, sans-serif; */
+      }
+
+      html {
+        min-height: 100%;
       }
 
       body {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -55%);
+        margin: 0;
+        min-height: 100dvh;
+        font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(209, 219, 199, 0.7), transparent 30%),
+          radial-gradient(circle at right 20%, rgba(214, 198, 170, 0.55), transparent 24%),
+          var(--bg);
       }
 
       a {
-        color: #0076ca;
+        color: inherit;
         text-decoration: none;
       }
 
-      .header {
-        /* color: #444; */
-        font-size: 24px;
-        margin-bottom: 20px;
+      .page {
+        width: min(1080px, 100%);
+        margin: 0 auto;
+        padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 56px);
+      }
+
+      .layout {
+        display: grid;
+        gap: clamp(32px, 5vw, 80px);
+        align-items: center;
+        min-height: calc(100dvh - clamp(64px, 12vw, 144px));
+      }
+
+      .intro {
+        max-width: 32rem;
       }
 
       .avatar {
-        width: 72px;
-        height: 72px;
-        border-radius: 4px;
-        background-color: #55c5ea;
-        margin-bottom: 8px;
+        width: 88px;
+        height: 88px;
+        border-radius: 16px;
+        display: block;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
       }
 
-      .content h3 {
-        color: #333;
-        font-size: 18px;
-        letter-spacing: 1px;
-        margin-bottom: 8px;
+      .eyebrow {
+        margin: 0 0 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
-      .content ul {
-        list-style: none;
-        margin-left: -2px;
-        margin-bottom: 10px;
+      h1 {
+        margin: 0;
+        font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua',
+          Georgia, serif;
+        font-size: clamp(3rem, 8vw, 5.8rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
       }
 
-      .content ul li {
-        color: #444;
-        width: 14em;
-        padding: 5px;
-        font-size: 16px;
-        font-weight: 400;
+      .summary {
+        margin: 18px 0 0;
+        max-width: 28rem;
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        line-height: 1.7;
+        color: var(--muted);
       }
 
-      .content li img {
-        width: 18px;
-        margin-top: -2px;
-        vertical-align: middle;
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .content li a,
-      .content li span {
-        vertical-align: middle;
-        line-height: 22px;
+      .link {
+        display: grid;
+        gap: 6px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--bg-soft);
+        backdrop-filter: blur(10px);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background-color 180ms ease;
       }
 
-      .footer {
-        color: #999;
-        font-size: 14px;
-        /* margin-top: 20px; */
+      .link--featured {
+        border-color: rgba(23, 107, 90, 0.25);
+        background: rgba(240, 247, 244, 0.9);
       }
 
-      .revisit {
-        position: fixed;
-        bottom: 0;
+      .link:hover,
+      .link:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(23, 107, 90, 0.38);
+        background: rgba(255, 252, 247, 0.92);
+      }
+
+      .link-label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .link-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+
+      .link-note {
+        margin: 0;
+        font-size: 0.96rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .meta {
+        margin-top: 16px;
+        font-size: 0.92rem;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .meta a {
+        color: var(--accent);
+      }
+
+      .arrow {
+        color: var(--accent);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (min-width: 860px) {
+        .layout {
+          grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding-inline: 18px;
+        }
+
+        .layout {
+          min-height: auto;
+        }
+
+        .link-title {
+          font-size: 1rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
       }
     </style>
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-82267837-1"
@@ -111,45 +233,78 @@
   </head>
 
   <body>
-    <div class="header">
-      <img src="assets/avatar.jpg" class="avatar" alt="github" />
-      <p>Junjie</p>
-    </div>
-    <div class="content">
-      <ul>
-        <li>
-          <img src="assets/github.png" alt="github" />
-          <span> Share code </span>
-          <a href="https://github.com/junjie-xyz">@Github</a>
-        </li>
-        <!-- <li>
-        <img src="assets/blog.png" alt="blog">
-        <span> Lazy blogger </span>
-        <a href="https://ioriens.coding.me/IOriens/">@Coding</a>
-      </li> -->
-        <li>
-          <img src="assets/x.png" alt="X" />
-          <span> Share thoughts </span>
-          <a href="https://x.com/junjie_xyz">@X</a>
-        </li>
-        <li>
-          <img src="assets/instagram.png" alt="instagram" />
-          <span> Share photos </span>
-          <a href="https://www.instagram.com/junjie.xyz/">@Instagram</a>
-        </li>
-        <li>
-          <img src="assets/apple-music.png" alt="music" />
-          <span>  Listening </span>
-          <a href="music.html">@AppleMusic</a>
-        </li>
-      </ul>
-    </div>
-    <div class="footer">
-      Inspired by
-      <a href="https://brian.io/">brian</a>
+    <div class="page">
+      <main class="layout">
+        <section class="intro" aria-labelledby="site-title">
+          <img src="assets/avatar.jpg" class="avatar" alt="Portrait of Junjie" />
+          <p class="eyebrow">Personal links</p>
+          <h1 id="site-title">Junjie</h1>
+          <p class="summary">
+            Frontend developer sharing code, thoughts, photos, and songs
+            currently on repeat.
+          </p>
+        </section>
+
+        <nav class="links" aria-label="Personal links">
+          <a
+            class="link link--featured"
+            href="https://github.com/junjie-xyz"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="link-label">Code</span>
+            <span class="link-title">
+              <span>@GitHub</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </span>
+            <p class="link-note">Projects, experiments, and long-running work.</p>
+          </a>
+
+          <a
+            class="link"
+            href="https://x.com/junjie_xyz"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="link-label">Thoughts</span>
+            <span class="link-title">
+              <span>@X</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </span>
+            <p class="link-note">Short thoughts, loose notes, and quick observations.</p>
+          </a>
+
+          <a
+            class="link"
+            href="https://www.instagram.com/junjie.xyz/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="link-label">Photos</span>
+            <span class="link-title">
+              <span>@Instagram</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </span>
+            <p class="link-note">Photos, daily life, and notes shaped by light.</p>
+          </a>
+
+          <a class="link" href="music.html">
+            <span class="link-label">Listening</span>
+            <span class="link-title">
+              <span>@Apple Music</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </span>
+            <p class="link-note">Songs currently on repeat, one click away.</p>
+          </a>
+        </nav>
+      </main>
+
+      <p class="meta">
+        A quiet personal homepage with only the essentials.
+        <span class="sr-only">This is Junjie's personal homepage.</span>
+      </p>
     </div>
 
-    <!-- Baidu Analytics -->
     <script>
       var _hmt = _hmt || []
       ;(function() {
@@ -160,7 +315,6 @@
       })()
     </script>
 
-    <!-- Baidu Site Report -->
     <script>
       ;(function() {
         var bp = document.createElement('script')
