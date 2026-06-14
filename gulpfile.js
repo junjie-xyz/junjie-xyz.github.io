@@ -50,7 +50,7 @@ function inlineLocalImages() {
             return match
           }
 
-          const imagePath = path.resolve(file.base, src)
+          const imagePath = path.resolve(path.dirname(file.path), src)
           const mimeType = getMimeType(imagePath)
 
           if (!mimeType || !fs.existsSync(imagePath)) {
@@ -70,7 +70,7 @@ function inlineLocalImages() {
 
 function html() {
   return gulp
-    .src('src/*.html')
+    .src('src/**/*.html')
     .pipe(inlineLocalImages())
     .pipe(
       htmlmin({
@@ -106,7 +106,7 @@ exports.dev = gulp.series(html, json, assets, function () {
   browserSync.init({
     server: './'
   })
-  gulp.watch('src/*.html', html)
+  gulp.watch('src/**/*.html', html)
   gulp.watch('src/*.json', json)
 })
 
