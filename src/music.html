@@ -154,7 +154,14 @@
         transform: translateY(-1px);
       }
 
+      .player-list {
+        display: grid;
+        gap: 18px;
+      }
+
       .player-shell {
+        display: grid;
+        gap: 14px;
         padding: clamp(12px, 3vw, 20px);
         border: 1px solid var(--line);
         border-radius: 28px;
@@ -163,10 +170,44 @@
         backdrop-filter: blur(14px);
       }
 
+      .player-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .player-title {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .player-region {
+        margin: 0;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .player-status {
+        display: inline-flex;
+        margin-left: 8px;
+        padding: 2px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
       iframe {
         display: block;
         width: 100%;
-        max-width: 100%;
+        max-width: 660px;
+        margin: 0 auto;
         min-height: 450px;
         border: 0;
         overflow: hidden;
@@ -182,6 +223,11 @@
       }
 
       @media (max-width: 640px) {
+        .player-header {
+          display: grid;
+          gap: 2px;
+        }
+
         iframe {
           min-height: 420px;
         }
@@ -221,35 +267,70 @@
         <p class="eyebrow">Listening</p>
         <h1>Listening</h1>
         <p class="summary">
-          A playlist of songs I have been replaying lately. The embedded player
+          Playlists of songs I have been replaying lately. The embedded players
           may take a few seconds to load. If you prefer, you can open it
           directly in Apple Music.
         </p>
         <div class="hero-actions">
           <a
             class="primary"
+            href="https://music.apple.com/us/playlist/favorite-songs/pl.u-9DUxzamW81"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open US playlist
+          </a>
+          <a
+            class="secondary"
             href="https://music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E7%9A%84%E6%AD%8C%E6%9B%B2/pl.u-doU4PZD23"
             target="_blank"
             rel="noreferrer"
           >
-            Open in Apple Music
+            Open CN playlist
           </a>
-          <a class="secondary" href="index.html">Back to links</a>
         </div>
       </header>
 
-      <section class="player-shell" aria-label="Apple Music playlist player">
-        <iframe
-          allow="autoplay *; encrypted-media *;"
-          loading="lazy"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-          src="https://embed.music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E7%9A%84%E6%AD%8C%E6%9B%B2/pl.u-doU4PZD23"
-          title="Junjie's recent Apple Music playlist"
-        ></iframe>
-      </section>
+      <main class="player-list" aria-label="Apple Music playlist players">
+        <section
+          class="player-shell"
+          aria-label="United States Apple Music playlist"
+        >
+          <div class="player-header">
+            <p class="player-title">Apple Music</p>
+            <p class="player-region">United States playlist</p>
+          </div>
+          <iframe
+            allow="autoplay *; encrypted-media *;"
+            height="450"
+            loading="lazy"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/us/playlist/favorite-songs/pl.u-9DUxzamW81"
+            title="Junjie's United States Apple Music playlist"
+          ></iframe>
+        </section>
+
+        <section class="player-shell" aria-label="China Apple Music playlist">
+          <div class="player-header">
+            <p class="player-title">Apple Music</p>
+            <p class="player-region">
+              China playlist
+              <span class="player-status">Paused updates</span>
+            </p>
+          </div>
+          <iframe
+            allow="autoplay *; encrypted-media *;"
+            height="450"
+            loading="lazy"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E7%9A%84%E6%AD%8C%E6%9B%B2/pl.u-doU4PZD23"
+            title="Junjie's China Apple Music playlist with paused updates"
+          ></iframe>
+        </section>
+      </main>
 
       <p class="note">
-        If the player does not appear right away, give it a moment or refresh
+        If a player does not appear right away, give it a moment or refresh
         the page.
       </p>
     </div>
