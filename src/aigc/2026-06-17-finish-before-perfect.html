@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+    <title>如何不再追求完美：先完成，再完美</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/avatar.jpg" />
+    <link
+      rel="canonical"
+      href="https://ioriens.com/aigc/2026-06-17-finish-before-perfect.html"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="把创作阶段和评判阶段分开，先做出一个能被修改的版本，再通过迭代提高质量。"
+    />
+    <meta name="author" content="Junjie" />
+    <meta name="theme-color" content="#f5f1e7" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f5f1e7;
+        --paper-deep: #ebe1cf;
+        --ink: #211f1a;
+        --ink-soft: #5e5a50;
+        --ink-faint: #8a8375;
+        --line: #d8cdb9;
+        --line-strong: #b9ab91;
+        --green: #176b5a;
+        --green-deep: #0d4d40;
+        --rust: #a0472e;
+        --gold: #c89124;
+        --white: #fffaf0;
+        --shadow: 0 22px 52px rgba(47, 37, 20, 0.11);
+        --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        --serif: 'Noto Serif SC', 'Songti SC', serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 28px;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: var(--sans);
+        color: var(--ink);
+        background: var(--paper);
+        font-size: 17px;
+        line-height: 1.85;
+        letter-spacing: 0;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(90deg, rgba(23, 107, 90, 0.08), transparent 34%),
+          linear-gradient(180deg, rgba(200, 145, 36, 0.14), transparent 42%),
+          repeating-linear-gradient(
+            90deg,
+            rgba(33, 31, 26, 0.035) 0,
+            rgba(33, 31, 26, 0.035) 1px,
+            transparent 1px,
+            transparent 88px
+          );
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+        padding: 28px 28px 72px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 62px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--ink-soft);
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(47, 37, 20, 0.12);
+      }
+
+      .brand span,
+      .archive-link {
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .archive-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--green-deep);
+        background: rgba(255, 250, 240, 0.66);
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 270px;
+        gap: 44px;
+        align-items: end;
+        margin-bottom: 58px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--rust);
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 13em;
+        font-family: var(--serif);
+        font-size: 3.85rem;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .dek {
+        margin: 22px 0 0;
+        max-width: 45rem;
+        color: var(--ink-soft);
+        font-size: 1.08rem;
+        line-height: 1.9;
+      }
+
+      .version-panel {
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: rgba(255, 250, 240, 0.72);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .version-row {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 14px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .version-row:last-child {
+        border-bottom: 0;
+      }
+
+      .version {
+        color: var(--green-deep);
+        font-family: var(--serif);
+        font-size: 1.24rem;
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      .version-copy {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.94rem;
+        line-height: 1.65;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 54px;
+        align-items: start;
+      }
+
+      .toc {
+        position: sticky;
+        top: 24px;
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(245, 241, 231, 0.84);
+        backdrop-filter: blur(10px);
+      }
+
+      .toc-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .toc a {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 8px;
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+        line-height: 1.45;
+        text-decoration: none;
+      }
+
+      .toc a span:first-child {
+        color: var(--gold);
+        font-family: var(--serif);
+        font-weight: 900;
+      }
+
+      .article {
+        min-width: 0;
+      }
+
+      .lead-block {
+        padding: 32px;
+        border-left: 6px solid var(--green);
+        background: rgba(255, 250, 240, 0.74);
+        box-shadow: var(--shadow);
+      }
+
+      .lead-block p {
+        margin: 0 0 18px;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 1.22rem;
+        font-weight: 700;
+        line-height: 1.95;
+      }
+
+      .lead-block p:last-child {
+        margin-bottom: 0;
+      }
+
+      section {
+        padding: 48px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      section:last-child {
+        border-bottom: 0;
+      }
+
+      h2 {
+        margin: 0 0 20px;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 2rem;
+        line-height: 1.32;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 30px 0 14px;
+        color: var(--green-deep);
+        font-size: 1.1rem;
+        line-height: 1.55;
+      }
+
+      p {
+        margin: 0 0 18px;
+        color: var(--ink-soft);
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      ul,
+      ol {
+        margin: 18px 0 22px;
+        padding: 0;
+        list-style: none;
+      }
+
+      li {
+        position: relative;
+        margin: 0 0 12px;
+        padding-left: 28px;
+        color: var(--ink-soft);
+      }
+
+      li::before {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 0.88em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      blockquote {
+        margin: 28px 0;
+        padding: 22px 26px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: var(--green-deep);
+        color: var(--white);
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        font-weight: 900;
+        line-height: 1.75;
+      }
+
+      .examples {
+        display: grid;
+        gap: 10px;
+        margin: 22px 0;
+      }
+
+      .example {
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 240, 0.64);
+        color: var(--ink-soft);
+      }
+
+      .dialogue {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .line {
+        display: grid;
+        grid-template-columns: 116px 1fr;
+        gap: 18px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .speaker {
+        color: var(--rust);
+        font-weight: 900;
+      }
+
+      .quote {
+        color: var(--ink);
+        font-family: var(--serif);
+        font-weight: 700;
+      }
+
+      .closing {
+        padding: 32px;
+        border-radius: 8px;
+        background: var(--ink);
+      }
+
+      .closing h2,
+      .closing p,
+      .closing strong {
+        color: var(--white);
+      }
+
+      .closing p {
+        opacity: 0.88;
+      }
+
+      @media (max-width: 900px) {
+        .page {
+          padding: 22px 20px 56px;
+        }
+
+        .topbar {
+          margin-bottom: 44px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        h1 {
+          max-width: 12em;
+          font-size: 3rem;
+        }
+
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 34px;
+        }
+
+        .toc {
+          position: static;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .toc-title {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 620px) {
+        body {
+          font-size: 16px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        h1 {
+          font-size: 2.25rem;
+        }
+
+        .dek {
+          font-size: 1rem;
+        }
+
+        .version-row {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          grid-template-columns: 1fr;
+        }
+
+        .lead-block,
+        .closing {
+          padding: 24px 20px;
+        }
+
+        .lead-block p {
+          font-size: 1.08rem;
+        }
+
+        section {
+          padding: 38px 0;
+        }
+
+        h2 {
+          font-size: 1.56rem;
+        }
+
+        blockquote {
+          padding: 20px;
+          font-size: 1.12rem;
+        }
+
+        .line {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-82267837-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'UA-82267837-1')
+    </script>
+    <meta name="baidu-site-verification" content="C3WfF7hGfH" />
+  </head>
+
+  <body>
+    <div class="page">
+      <nav class="topbar" aria-label="Page navigation">
+        <a class="brand" href="../index.html">
+          <img src="../assets/avatar.jpg" alt="Junjie" />
+          <span>Junjie</span>
+        </a>
+        <a class="archive-link" href="index.html">← AIGC Archive</a>
+      </nav>
+
+      <header class="hero">
+        <div>
+          <p class="eyebrow">AIGC · 2026-06-17</p>
+          <h1>如何不再追求完美：先完成，再完美</h1>
+          <p class="dek">
+            完美主义真正卡住人的地方，不是标准高，而是把创作和评判放在同一秒发生。先让版本存在，后面才有修改、反馈和变好的空间。
+          </p>
+        </div>
+
+        <aside class="version-panel" aria-label="Iteration rhythm">
+          <div class="version-row">
+            <div class="version">v0.1</div>
+            <p class="version-copy">第一版的任务不是优秀，而是存在。</p>
+          </div>
+          <div class="version-row">
+            <div class="version">v0.2</div>
+            <p class="version-copy">第二版开始处理结构、缺口和反馈。</p>
+          </div>
+          <div class="version-row">
+            <div class="version">v0.3</div>
+            <p class="version-copy">第三版才值得认真追求表达和细节。</p>
+          </div>
+        </aside>
+      </header>
+
+      <div class="content-grid">
+        <aside class="toc" aria-label="Article sections">
+          <p class="toc-title">目录</p>
+          <a href="#quality"><span>00</span><span>质量来自迭代</span></a>
+          <a href="#version"><span>01</span><span>先有一个版本</span></a>
+          <a href="#rough"><span>02</span><span>承认烂版本</span></a>
+          <a href="#done"><span>03</span><span>定义完成标准</span></a>
+          <a href="#smallest"><span>04</span><span>最小可交付</span></a>
+          <a href="#timebox"><span>05</span><span>限制时间</span></a>
+          <a href="#separate"><span>06</span><span>分开创作和修改</span></a>
+          <a href="#visible"><span>07</span><span>让别人看见</span></a>
+          <a href="#seventy"><span>08</span><span>练习 70 分版本</span></a>
+          <a href="#next"><span>09</span><span>只看下一步</span></a>
+          <a href="#question"><span>10</span><span>问一个问题</span></a>
+        </aside>
+
+        <main class="article">
+          <div class="lead-block">
+            <p>
+              追求完美看似是对高标准的坚持，但在实际操作中，它往往是穿着华丽外衣的拖延。
+            </p>
+            <p>
+              核心问题通常不是“标准高”，而是<strong>把“创作阶段”和“评判阶段”混在一起</strong>——你一边做，一边挑错，一边否定结果，最后很难开始，也很难完成。
+            </p>
+            <p>
+              很多人以为自己在追求优秀，实际上是在逃避：做出来以后被评价、发现真实水平不如预期、承担决策错误的责任、面对不确定性。因为没完成的东西，永远可以在脑子里想象成完美的。
+            </p>
+            <p>
+              真正要训练的不是“不要追求好”，而是把“完美”放到第二步。第一步只允许自己做出一个能被修改的版本。
+            </p>
+          </div>
+
+          <section id="quality">
+            <h2>先接受一个事实：质量来自迭代，不来自一次性思考</h2>
+            <p>
+              程序员不会一次写出好代码，作家不会一次写出好文章，创业者不会一次做出好产品。现实世界的规律是：
+            </p>
+            <ul>
+              <li>第一版通常很差。</li>
+              <li>第二版开始能用。</li>
+              <li>第三版才有可能优秀。</li>
+            </ul>
+            <p>
+              完美主义者希望直接跳到第三版，这相当于要求一个孩子跳过学走路的阶段，直接去跑马拉松。
+            </p>
+            <p>
+              观察任何领域的高手，他们的真实工作方式都不是“想清楚再做”，而是“做出来，看问题，再修改”。软件开发有 MVP，设计有草图，写作有初稿，科研有预印本。先有东西，再有改进。世界上绝大多数成果都是迭代产物。
+            </p>
+          </section>
+
+          <section id="version">
+            <h2>1. 把目标从“做好”改成“先有一个版本”</h2>
+            <p>
+              不要对自己说“我要写一篇很好的文章”、“我要做一个很完整的方案”、“我要准备充分了再开始”。
+            </p>
+            <p>改成：</p>
+            <div class="examples">
+              <div class="example">我先写出 500 字草稿，允许结构乱、句子丑、观点不完整。</div>
+              <div class="example">我先做一个能让别人看懂方向的版本。</div>
+              <div class="example">我先把 60 分版本交出来。</div>
+              <div class="example">我先完成第一轮，不评价质量。</div>
+            </div>
+            <p>
+              <strong>第一版的任务不是优秀，而是存在。</strong> 很多东西只有做出来之后，问题才会变清楚。没有第一版，你连修改的对象都没有。
+            </p>
+            <p>完成感会推动下一步。完美感不会。</p>
+          </section>
+
+          <section id="rough">
+            <h2>2. 给“烂版本”一个合法身份</h2>
+            <p>
+              你需要允许自己做出一个很粗糙的版本，并且直接给它命名：v0.1、草稿版、试做版、只求完成版、30 分钟版本。
+            </p>
+            <p>
+              这个命名很重要。它会提醒你：现在不是交最终答卷，现在只是在制造原材料。完美主义常常让人把每一步都当成终稿，这样压力会非常大。你把当前版本叫作“草稿”，大脑会更容易启动。
+            </p>
+          </section>
+
+          <section id="done">
+            <h2>3. 给“完成”一个非常具体的标准</h2>
+            <p>模糊的目标会制造完美主义。</p>
+            <p>
+              “我要做好这个方案”太模糊。“今天晚上 10 点前写完 800 字初稿”就很具体。
+            </p>
+            <p>
+              你可以用这个句式定义完成：<strong>我将在【时间】之前，完成【具体产物】，标准是【可以被看见或提交】。</strong>
+            </p>
+            <p>比如：</p>
+            <div class="examples">
+              <div class="example">我将在今晚 9 点前，写完一版 500 字文案，标准是能发给同事看。</div>
+              <div class="example">我将在明天下午 3 点前，做出 6 页 PPT，标准是每页都有标题和主要内容。</div>
+              <div class="example">我将在今天睡前，整理出 10 条想法，标准是不筛选、不润色。</div>
+            </div>
+            <p>标准越具体，越容易停止内耗。</p>
+          </section>
+
+          <section id="smallest">
+            <h2>4. 先问“最小可交付版本”是什么</h2>
+            <p>
+              每次开始一件事之前，问自己：<strong>这个东西最小做到什么程度，就算“已经做出来”？</strong>
+            </p>
+            <ul>
+              <li>写文章：有标题、开头、三个要点、结尾。</li>
+              <li>做 PPT：有封面、目录、每页一个结论。</li>
+              <li>做产品：能跑通主流程，不要求视觉好看。</li>
+              <li>准备汇报：有一个 5 分钟能讲清楚的版本。</li>
+              <li>学习技能：先做一道题、写一段代码、录一分钟练习。</li>
+            </ul>
+            <p>剥离所有锦上添花的东西，先搭建起骨架，细节后面再补。</p>
+          </section>
+
+          <section id="timebox">
+            <h2>5. 用时间限制代替质量幻想</h2>
+            <p>
+              完美主义者很容易无限打磨，因为“我觉得还不够好”这个标准没有终点。
+            </p>
+            <p>
+              解决办法：<strong>先限制时间，不限制结果。</strong>
+            </p>
+            <ul>
+              <li>20 分钟写完第一版。</li>
+              <li>45 分钟做出方案骨架。</li>
+              <li>2 小时做出可以演示的版本。</li>
+            </ul>
+            <p>
+              时间到了就停。结果不好也停。不要等“状态好一点再开始”，直接设一个时间盒，倒计时走起来。
+            </p>
+            <p>
+              这不是敷衍，这是训练自己接受一个事实：很多任务不需要一次做对，很多任务需要多轮迭代。截止时间比灵感可靠，质量由时间决定，不由情绪决定。
+            </p>
+          </section>
+
+          <section id="separate">
+            <h2>6. 把创作和修改彻底分开</h2>
+            <p>
+              不要一边写一边改，这样最容易卡住。给自己设一条明确的规则：
+            </p>
+            <ul>
+              <li>第一轮只生产，不评价。</li>
+              <li>第二轮只修改，不扩展。</li>
+              <li>第三轮只优化表达。</li>
+            </ul>
+            <p>
+              不要同时追求内容、结构、表达、排版、细节全部到位。一次只处理一个维度，压力会小很多。
+            </p>
+            <p>
+              写作时尤其有效：第一轮可以很乱，第二轮再调结构，第三轮再改句子。不要指望第一遍就写得清楚。
+            </p>
+            <p>
+              很多人不是能力不够，是太早让“审稿人”进入了“创作者”的工作区。
+            </p>
+          </section>
+
+          <section id="visible">
+            <h2>7. 接受别人看到你的不完美</h2>
+            <p>很多人不是怕东西不完美，而是怕别人看到自己的不完美。</p>
+            <p>
+              但现实是：别人通常没有你想象中那么关注你的瑕疵。在很多合作场景里，一个粗糙但可以讨论的版本，比一个迟迟不出现的完美版本有价值得多。
+            </p>
+            <p>你可以这样发出去：</p>
+            <div class="examples">
+              <div class="example">“这是第一版，我先把结构做出来了，细节还没打磨。”</div>
+              <div class="example">“这是草稿，重点想先确认方向。”</div>
+              <div class="example">“这个版本不追求完整，我想先看看主线是否成立。”</div>
+            </div>
+            <p>
+              这样别人知道你不是把草稿当终稿，你的心理压力也会小很多。缩短反馈周期，越早拿出去让人看到，你越早知道哪里该改——而且往往你纠结半天的那些细节，别人根本不在乎。
+            </p>
+          </section>
+
+          <section id="seventy">
+            <h2>8. 刻意练习交出 70 分版本</h2>
+            <p>完美主义很难只靠想通解决，需要行为训练。</p>
+            <p>
+              挑一些低风险的任务，刻意只做到 70 分：发一条不反复修改的消息、写一篇不追求漂亮的日记、做一页不精修排版的 PPT、录一段不重录 10 遍的视频。
+            </p>
+            <p>
+              你会慢慢发现：70 分版本通常不会造成灾难。很多时候，70 分已经足够推进事情。而且从 70 分提升到 90 分所耗费的时间和精力，往往比从 0 到 70 分还要多，性价比极低。
+            </p>
+            <p>
+              训练目标不是质量，训练目标是让大脑习惯“东西不完美也能活下来”。次数多了以后，心理阻力会明显下降。
+            </p>
+          </section>
+
+          <section id="next">
+            <h2>9. 用“下一步”替代“最终结果”</h2>
+            <p>
+              完美主义者常常盯着最终成果，被最终成果吓住。空想会放大焦虑，行动会降低焦虑。
+            </p>
+            <p>
+              不要问“我能不能把整件事做好”。只问：<strong>下一步是什么？</strong>
+            </p>
+            <ul>
+              <li>下一步是打开文档。</li>
+              <li>下一步是写标题。</li>
+              <li>下一步是列 5 个要点。</li>
+              <li>下一步是做第一页。</li>
+              <li>下一步是发给一个人看。</li>
+            </ul>
+            <p>把庞大的目标拆解成小到不可能失败的行动。每次只走一步，但每一步都是真实的推进。</p>
+          </section>
+
+          <section id="question">
+            <h2>10. 每次卡住时，问自己一个问题</h2>
+            <blockquote>我现在是在提高质量，还是在逃避发布？</blockquote>
+            <p>
+              这个问题非常有效。因为很多“继续优化”其实不会带来明显提升，只是在延迟面对结果。如果你发现自己在反复调一个颜色、改一个措辞、纠结一个方案，停下来诚实回答这个问题，答案往往很清楚。
+            </p>
+          </section>
+
+          <section id="dialogue">
+            <h2>转变你的内部对话</h2>
+            <div class="dialogue">
+              <div class="line">
+                <div class="speaker">完美主义者说</div>
+                <div class="quote">“如果做不好，不如不做。”</div>
+              </div>
+              <div class="line">
+                <div class="speaker">完成主义者说</div>
+                <div class="quote">“先不管好坏，做出来再说，大不了慢慢改。”</div>
+              </div>
+              <div class="line">
+                <div class="speaker">完美主义者说</div>
+                <div class="quote">“我需要等一个状态最好的时刻再开始。”</div>
+              </div>
+              <div class="line">
+                <div class="speaker">完成主义者说</div>
+                <div class="quote">“哪怕现在状态很差，我也先写下第一行字。”</div>
+              </div>
+              <div class="line">
+                <div class="speaker">完美主义者说</div>
+                <div class="quote">“我的作品代表了我的价值，绝不能有瑕疵。”</div>
+              </div>
+              <div class="line">
+                <div class="speaker">完成主义者说</div>
+                <div class="quote">“这只是一次尝试和迭代，不代表我个人的成败。”</div>
+              </div>
+            </div>
+            <p>
+              完美主义追求的是“第一次就对”，成事的人追求的是“先有，再好”。前者关注起点的质量，后者关注十次迭代之后的质量。长期来看，第二种方式几乎总是更强。
+            </p>
+          </section>
+
+          <section class="closing" id="start-now">
+            <h2>现在就可以做的一件事</h2>
+            <p>
+              找一件你拖着没做的事，给自己 25 分钟，只做一个 v0.1 版本。时间到就停，不许重来。
+            </p>
+            <p>
+              完成以后，只问一个问题：<strong>下一轮要改哪三处？</strong>
+            </p>
+            <p>
+              没有做出来的东西，无法被修改。没有交出去的版本，无法获得反馈。没有第一轮，第二轮不会出现。
+            </p>
+            <p><strong>先让东西存在，再让东西变好。</strong></p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      var _hmt = _hmt || []
+      ;(function() {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?1e415f3a9200edffb8566fbeee4b669f'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+      })()
+    </script>
+
+    <script>
+      ;(function() {
+        var bp = document.createElement('script')
+        var curProtocol = window.location.protocol.split(':')[0]
+        if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+        } else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+        }
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(bp, s)
+      })()
+    </script>
+  </body>
+</html>
