@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IOriens/ioriens.github.io.git"
+    "url": "git+https://github.com/junjie-xyz/junjie-xyz.github.io.git"
   },
   "keywords": [
     "junjie",
@@ -18,9 +18,9 @@
   "author": "Junjie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/IOriens/ioriens.github.io/issues"
+    "url": "https://github.com/junjie-xyz/junjie-xyz.github.io/issues"
   },
-  "homepage": "https://github.com/IOriens/ioriens.github.io#readme",
+  "homepage": "https://github.com/junjie-xyz/junjie-xyz.github.io#readme",
   "devDependencies": {
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.1",
