@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发展心理学 · 一份详尽的导论</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221F1A;
+    --ink-soft:#4A443B;
+    --ground:#ECEAE0;
+    --paper:#F7F5ED;
+    --moss:#3B5A45;
+    --moss-deep:#1E2E24;
+    --amber:#B47B2F;
+    --amber-soft:#D9A24E;
+    --sage:#7C846C;
+    --line:rgba(34,31,26,.14);
+    --line-soft:rgba(34,31,26,.08);
+    --font-cjk-serif:'Noto Serif SC',serif;
+    --font-cjk-sans:'Noto Sans SC',-apple-system,sans-serif;
+    --font-lat:'Fraunces',Georgia,serif;
+    --font-mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--font-cjk-sans);
+    font-weight:400;
+    line-height:1.85;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:.01em;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--moss);
+    display:inline-block;
+  }
+  h2{font-family:var(--font-cjk-serif);font-weight:900;line-height:1.25;letter-spacing:.02em}
+  h3{font-family:var(--font-cjk-serif);font-weight:700;letter-spacing:.02em}
+  p{color:var(--ink-soft)}
+  .num{font-family:var(--font-lat);font-variant-numeric:tabular-nums}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:72px 0 84px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero-kicker{margin-bottom:26px}
+  .hero-lat{
+    font-family:var(--font-lat);
+    font-weight:300;
+    font-style:italic;
+    font-size:clamp(1.1rem,2.4vw,1.5rem);
+    color:var(--amber);
+    letter-spacing:.01em;
+    display:block;
+    margin-bottom:6px;
+  }
+  .hero h1{
+    font-family:var(--font-cjk-serif);
+    font-weight:900;
+    font-size:clamp(3.2rem,9vw,6rem);
+    line-height:1.02;
+    letter-spacing:.04em;
+    margin-bottom:28px;
+  }
+  .hero-lede{
+    font-size:1.12rem;
+    max-width:34em;
+    color:var(--ink-soft);
+  }
+  .hero-lede strong{color:var(--ink);font-weight:500}
+  .hero-meta{
+    margin-top:34px;
+    display:flex;
+    gap:34px;
+    flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+  }
+  .hero-meta div{max-width:180px}
+  .hero-meta .num{font-size:1.7rem;color:var(--moss);font-weight:400;display:block;line-height:1.1}
+  .hero-meta span.lbl{font-size:.78rem;color:var(--sage);font-family:var(--font-mono);letter-spacing:.06em}
+
+  /* rings signature */
+  .rings-holder{display:flex;justify-content:center;align-items:center}
+  .rings{width:100%;max-width:360px;height:auto}
+  .rings circle{fill:none;stroke-linecap:round;transform-origin:center}
+  .ring-anim{
+    stroke-dasharray:var(--len);
+    stroke-dashoffset:var(--len);
+    animation:draw 2.1s cubic-bezier(.5,0,.15,1) forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .rings .rlabel{font-family:var(--font-mono);font-size:9px;fill:var(--ink-soft);letter-spacing:.04em}
+  .rings .core{fill:var(--amber);stroke:none;opacity:0;animation:fadein .8s ease 1.6s forwards}
+  @keyframes fadein{to{opacity:1}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:74px 0}
+  .sec-head{margin-bottom:44px;max-width:52em}
+  .sec-head .eyebrow{margin-bottom:16px}
+  .sec-head h2{font-size:clamp(1.9rem,4.4vw,2.7rem);margin-bottom:18px}
+  .sec-head p{font-size:1.05rem}
+  .divider{height:1px;background:var(--line);border:none}
+
+  /* ---------- DEFINITION / SCOPE ---------- */
+  .scope-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line-soft);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .scope-cell{background:var(--paper);padding:30px 30px 34px}
+  .scope-cell .num{font-family:var(--font-lat);font-size:1.5rem;color:var(--amber);font-weight:500}
+  .scope-cell h3{font-size:1.2rem;margin:8px 0 10px}
+  .scope-cell p{font-size:.96rem}
+
+  /* ---------- DEBATES ---------- */
+  .debate-band{background:var(--moss-deep);color:#EDEAE0;border-radius:6px;padding:8px}
+  .debate-inner{padding:36px 34px 40px}
+  .debate-inner .eyebrow{color:var(--amber-soft)}
+  .debate-inner h2{color:#F4F1E8;font-size:clamp(1.8rem,4vw,2.4rem);margin:14px 0 30px}
+  .debate-row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:20px;
+    padding:22px 0;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .debate-row:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+  .debate-pole{color:#E7E3D8}
+  .debate-pole h3{font-size:1.12rem;color:#F4F1E8;margin-bottom:5px}
+  .debate-pole p{color:#B9C2B2;font-size:.9rem;line-height:1.7}
+  .debate-pole.right{text-align:right}
+  .vs{font-family:var(--font-lat);font-style:italic;color:var(--amber-soft);font-size:1.1rem;padding:0 6px;white-space:nowrap}
+
+  /* ---------- THEORIES ACCORDION ---------- */
+  .theory{border:1px solid var(--line);border-radius:5px;background:var(--paper);margin-bottom:12px;overflow:hidden}
+  .theory summary{
+    list-style:none;
+    cursor:pointer;
+    padding:22px 26px;
+    display:flex;
+    align-items:baseline;
+    gap:20px;
+    transition:background .2s;
+  }
+  .theory summary::-webkit-details-marker{display:none}
+  .theory summary:hover{background:#F0EDE2}
+  .theory summary:focus-visible{outline:2px solid var(--moss);outline-offset:-2px}
+  .theory .t-idx{font-family:var(--font-lat);font-size:1.3rem;color:var(--amber);font-weight:500;min-width:2.2ch}
+  .theory .t-title{flex:1}
+  .theory .t-title h3{font-size:1.28rem;display:inline}
+  .theory .t-person{font-family:var(--font-mono);font-size:.74rem;color:var(--sage);letter-spacing:.04em;display:block;margin-top:4px}
+  .theory .t-chevron{font-family:var(--font-lat);color:var(--moss);font-size:1.3rem;transition:transform .25s;line-height:1}
+  .theory[open] .t-chevron{transform:rotate(45deg)}
+  .theory-body{padding:2px 26px 30px;border-top:1px solid var(--line-soft)}
+  .theory-body>p{margin:18px 0 4px;font-size:.99rem}
+  .theory-body>p.core-concept{color:var(--ink);background:rgba(59,90,69,.07);border-left:3px solid var(--moss);padding:12px 16px;border-radius:0 4px 4px 0;font-size:.94rem;line-height:1.7}
+  .stage-tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:.9rem}
+  .stage-tbl th{
+    text-align:left;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--sage);padding:8px 12px 8px 0;border-bottom:1.5px solid var(--line);font-weight:400;
+  }
+  .stage-tbl td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft);line-height:1.6}
+  .stage-tbl td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+  .stage-tbl td .age{font-family:var(--font-lat);color:var(--amber);font-size:.85rem}
+  .stage-tbl .virtue{font-family:var(--font-cjk-serif);color:var(--moss);font-weight:700}
+
+  /* ---------- DOMAINS ---------- */
+  .domain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .domain-card{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:26px 22px 28px;position:relative;overflow:hidden}
+  .domain-card .dot{width:30px;height:30px;border-radius:50%;margin-bottom:18px}
+  .domain-card h3{font-size:1.14rem;margin-bottom:10px}
+  .domain-card p{font-size:.88rem;line-height:1.7}
+
+  /* ---------- LIFESPAN TIMELINE ---------- */
+  .life-track{position:relative;margin-top:20px}
+  .life-item{
+    display:grid;grid-template-columns:130px 1fr;gap:28px;
+    padding:22px 0;border-top:1px solid var(--line);align-items:start;
+  }
+  .life-item:last-child{border-bottom:1px solid var(--line)}
+  .life-age{font-family:var(--font-lat);font-size:1.05rem;color:var(--moss);font-weight:500;line-height:1.4}
+  .life-age .en{display:block;font-family:var(--font-mono);font-size:.66rem;color:var(--sage);letter-spacing:.06em;margin-top:4px;font-style:normal}
+  .life-body h3{font-size:1.16rem;margin-bottom:7px}
+  .life-body p{font-size:.94rem}
+
+  /* ---------- METHODS ---------- */
+  .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .method-card{border:1px solid var(--line);border-radius:5px;padding:26px 24px 28px;background:var(--paper)}
+  .method-card .eyebrow{margin-bottom:12px;color:var(--amber)}
+  .method-card h3{font-size:1.15rem;margin-bottom:12px}
+  .method-card p{font-size:.9rem;margin-bottom:14px}
+  .method-card .pm{font-size:.83rem;line-height:1.6;padding:5px 0;border-top:1px solid var(--line-soft);color:var(--ink-soft)}
+  .method-card .pm b{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;color:var(--sage);text-transform:uppercase;font-weight:400;margin-right:8px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:50px 0 64px;margin-top:20px}
+  footer p{font-size:.88rem;max-width:44em}
+  footer .eyebrow{margin-bottom:16px}
+  .caveat{font-family:var(--font-mono);font-size:.74rem;color:var(--sage);margin-top:20px;line-height:1.8;letter-spacing:.02em}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.4,0,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:8px}
+    .rings-holder{order:-1;margin-bottom:12px}
+    .rings{max-width:260px}
+    .scope-grid{grid-template-columns:1fr}
+    .domain-grid{grid-template-columns:repeat(2,1fr)}
+    .method-grid{grid-template-columns:1fr}
+    .debate-row{grid-template-columns:1fr;gap:6px;text-align:left}
+    .debate-pole.right{text-align:left}
+    .vs{padding:2px 0}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .domain-grid{grid-template-columns:1fr}
+    .life-item{grid-template-columns:1fr;gap:8px}
+    .theory summary{gap:12px;padding:18px 18px}
+    .theory-body{padding:2px 18px 26px}
+    .hero-meta{gap:22px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .rings .core{opacity:1}
+    .ring-anim{stroke-dashoffset:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-kicker">
+        <span class="eyebrow">一份详尽的导论 · Guide</span>
+      </div>
+      <span class="hero-lat">Developmental Psychology</span>
+      <h1>发展心理学</h1>
+      <p class="hero-lede">研究人在<strong>整个生命历程</strong>中，身体、认知、情绪与社会性如何随时间发生系统变化的科学——从受精卵到暮年，追问「人是怎样成为现在的自己的」。</p>
+      <div class="hero-meta">
+        <div><span class="num">4</span><span class="lbl">核心研究领域</span></div>
+        <div><span class="num">8</span><span class="lbl">经典理论传统</span></div>
+        <div><span class="num">0→100+</span><span class="lbl">覆盖的年龄跨度</span></div>
+      </div>
+    </div>
+    <div class="rings-holder">
+      <!-- signature: 生命年轮 -->
+      <svg class="rings" viewBox="0 0 320 320" role="img" aria-label="以同心年轮表示的生命全程阶段">
+        <circle class="core" cx="160" cy="160" r="14"/>
+        <circle class="ring-anim" cx="160" cy="160" r="40"  stroke="#D9A24E" stroke-width="5" style="--len:251;animation-delay:.1s"/>
+        <circle class="ring-anim" cx="160" cy="160" r="66"  stroke="#B47B2F" stroke-width="5" style="--len:415;animation-delay:.28s"/>
+        <circle class="ring-anim" cx="160" cy="160" r="92"  stroke="#7C846C" stroke-width="5" style="--len:578;animation-delay:.46s"/>
+        <circle class="ring-anim" cx="160" cy="160" r="118" stroke="#4F7159" stroke-width="5" style="--len:741;animation-delay:.64s"/>
+        <circle class="ring-anim" cx="160" cy="160" r="144" stroke="#1E2E24" stroke-width="5" style="--len:905;animation-delay:.82s"/>
+        <text class="rlabel" x="160" y="112" text-anchor="middle">婴儿期</text>
+        <text class="rlabel" x="160" y="60"  text-anchor="middle">童年</text>
+        <text class="rlabel" x="160" y="34"  text-anchor="middle">青春期</text>
+        <text class="rlabel" x="160" y="8"   text-anchor="middle">成年</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 什么是发展心理学 ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">01 — 学科定位</span>
+      <h2>它研究什么？</h2>
+      <p>发展心理学（又称毕生发展心理学，life-span developmental psychology）关注的不是「人是什么样」，而是「人如何变化」。它试图描述变化、解释变化背后的机制，并在此基础上预测与干预。研究对象横跨以下四个相互交织的层面：</p>
+    </div>
+    <div class="scope-grid reveal">
+      <div class="scope-cell">
+        <div class="num">A</div>
+        <h3>生理发展</h3>
+        <p>身体、大脑与神经系统、运动能力、青春期与衰老等生物性变化，以及基因与环境如何共同塑造这些进程。</p>
+      </div>
+      <div class="scope-cell">
+        <div class="num">B</div>
+        <h3>认知发展</h3>
+        <p>感知、注意、记忆、语言、思维与问题解决能力的成长与衰退——我们如何逐渐理解并加工这个世界。</p>
+      </div>
+      <div class="scope-cell">
+        <div class="num">C</div>
+        <h3>社会性与情绪发展</h3>
+        <p>依恋、自我概念、气质、人格、道德判断、人际关系与情绪调节能力如何随年龄演变。</p>
+      </div>
+      <div class="scope-cell">
+        <div class="num">D</div>
+        <h3>语言发展</h3>
+        <p>从咿呀学语到复杂语法的掌握，语言既是认知的产物，也是社会互动的工具，常被单列研究。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 核心争论 ================= -->
+<section>
+  <div class="wrap">
+    <div class="debate-band reveal">
+      <div class="debate-inner">
+        <span class="eyebrow">02 — 贯穿全学科的张力</span>
+        <h2>三大核心争论</h2>
+        <div class="debate-row">
+          <div class="debate-pole">
+            <h3>先天 · Nature</h3>
+            <p>发展主要由基因与生物成熟程序决定，是「预设好的展开」。</p>
+          </div>
+          <span class="vs">对峙 vs</span>
+          <div class="debate-pole right">
+            <h3>后天 · Nurture</h3>
+            <p>发展主要由环境、经验、教养与文化塑造。</p>
+          </div>
+        </div>
+        <div class="debate-row">
+          <div class="debate-pole">
+            <h3>连续性 · Continuity</h3>
+            <p>发展是渐进、累积、量变的平滑过程。</p>
+          </div>
+          <span class="vs">对峙 vs</span>
+          <div class="debate-pole right">
+            <h3>阶段性 · Discontinuity</h3>
+            <p>发展是跳跃式的，经历质变明显的不同「阶段」。</p>
+          </div>
+        </div>
+        <div class="debate-row">
+          <div class="debate-pole">
+            <h3>稳定性 · Stability</h3>
+            <p>早期形成的特质（如气质）会持续终生，早期经验决定一切。</p>
+          </div>
+          <span class="vs">对峙 vs</span>
+          <div class="debate-pole right">
+            <h3>可变性 · Change</h3>
+            <p>人具有可塑性，在任何年龄都可能发生实质性改变。</p>
+          </div>
+        </div>
+        <p style="color:#B9C2B2;font-size:.9rem;margin-top:26px;line-height:1.8">当代主流立场普遍拒绝非此即彼：发展被理解为<span style="color:#E7E3D8">基因与环境持续交互</span>（gene–environment interaction）的结果，既有连续也有阶段，既有稳定也有改变。争论的意义在于「各占多少权重、在什么条件下」，而非二选一。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 主要理论 ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">03 — 理论传统</span>
+      <h2>塑造这门学科的经典理论</h2>
+      <p>没有任何单一理论能解释全部发展现象。下列理论各自聚焦不同侧面、基于不同假设，至今仍在被检验、修正与整合。点击展开每个理论的要点与阶段划分。</p>
+    </div>
+
+    <!-- Piaget -->
+    <details class="theory reveal" open>
+      <summary>
+        <span class="t-idx">01</span>
+        <span class="t-title"><h3>认知发展理论</h3><span class="t-person">JEAN PIAGET · 让·皮亚杰</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：儿童是主动建构知识的「小科学家」。他们通过<b>同化</b>（把新信息纳入已有认知图式）与<b>顺应</b>（修改图式以适应新信息）来达到平衡，认知能力经历四个质变阶段，顺序固定、不可逾越。</p>
+        <table class="stage-tbl">
+          <thead><tr><th>阶段</th><th>年龄</th><th>关键成就</th></tr></thead>
+          <tbody>
+            <tr><td>感知运动阶段</td><td><span class="age">0–2岁</span></td><td>通过感官与动作认识世界；发展出<b>客体永久性</b>（物体不在视野中仍存在）。</td></tr>
+            <tr><td>前运算阶段</td><td><span class="age">2–7岁</span></td><td>出现符号思维与语言；但存在<b>自我中心</b>、缺乏守恒概念、思维不可逆。</td></tr>
+            <tr><td>具体运算阶段</td><td><span class="age">7–11岁</span></td><td>获得<b>守恒</b>与逻辑运算能力，但只能对具体、可见的事物进行推理。</td></tr>
+            <tr><td>形式运算阶段</td><td><span class="age">11岁以上</span></td><td>能进行抽象、假设—演绎推理，思考可能性与理想。</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.86rem;color:var(--sage);margin-top:16px">后续研究指出：皮亚杰可能低估了婴幼儿的能力，阶段间的过渡也比他设想的更连续、更受任务与文化影响。</p>
+      </div>
+    </details>
+
+    <!-- Erikson -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">02</span>
+        <span class="t-title"><h3>心理社会发展理论</h3><span class="t-person">ERIK ERIKSON · 埃里克·埃里克森</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：人一生要经历八个阶段，每个阶段都面临一对核心「心理社会危机」。成功化解危机会获得一种「美德」，塑造健康人格；这是少数覆盖<b>全生命历程</b>（含成年与老年）的经典理论。</p>
+        <table class="stage-tbl">
+          <thead><tr><th>危机冲突</th><th>年龄</th><th>获得的美德</th></tr></thead>
+          <tbody>
+            <tr><td>信任 vs 不信任</td><td><span class="age">0–1岁</span></td><td><span class="virtue">希望</span></td></tr>
+            <tr><td>自主 vs 羞怯怀疑</td><td><span class="age">1–3岁</span></td><td><span class="virtue">意志</span></td></tr>
+            <tr><td>主动 vs 内疚</td><td><span class="age">3–6岁</span></td><td><span class="virtue">目的</span></td></tr>
+            <tr><td>勤奋 vs 自卑</td><td><span class="age">6–12岁</span></td><td><span class="virtue">能力</span></td></tr>
+            <tr><td>同一性 vs 角色混乱</td><td><span class="age">青春期</span></td><td><span class="virtue">忠诚</span></td></tr>
+            <tr><td>亲密 vs 孤独</td><td><span class="age">成年早期</span></td><td><span class="virtue">爱</span></td></tr>
+            <tr><td>繁衍 vs 停滞</td><td><span class="age">成年中期</span></td><td><span class="virtue">关怀</span></td></tr>
+            <tr><td>完善 vs 绝望</td><td><span class="age">成年晚期</span></td><td><span class="virtue">智慧</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- Vygotsky -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">03</span>
+        <span class="t-title"><h3>社会文化理论</h3><span class="t-person">LEV VYGOTSKY · 列夫·维果茨基</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：认知发展根植于<b>社会互动与文化</b>。儿童在与更有能力者（父母、老师、同伴）的合作中「内化」思维工具，其中语言是最重要的工具。这与皮亚杰强调个体独立探索形成鲜明对比。</p>
+        <p style="margin-top:18px;font-size:.96rem"><b style="color:var(--ink)">最近发展区（ZPD）</b>　儿童独立能做到的水平，与在他人帮助下能达到的水平，二者之间的差距。教学的最佳着力点正在这个区间。</p>
+        <p style="margin-top:12px;font-size:.96rem"><b style="color:var(--ink)">支架式教学（Scaffolding）</b>　成人根据儿童当前水平提供恰到好处的支持，随能力提升逐步撤除，如同建筑施工的脚手架。</p>
+        <p style="margin-top:12px;font-size:.96rem"><b style="color:var(--ink)">私人言语（Private speech）</b>　儿童自言自语并非无意义，而是把社会性语言转化为内在思维、进行自我引导的过渡形式。</p>
+      </div>
+    </details>
+
+    <!-- Attachment -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">04</span>
+        <span class="t-title"><h3>依恋理论</h3><span class="t-person">BOWLBY & AINSWORTH · 鲍尔比与安斯沃思</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：婴儿与主要照料者之间形成的<b>情感联结（依恋）</b>具有进化上的生存价值，并会内化为「内部工作模型」，影响个体终生的人际关系与情绪安全感。</p>
+        <p style="margin-top:16px;font-size:.94rem">安斯沃思通过「<b>陌生情境</b>」实验（观察婴儿在分离与重聚时的反应），区分出几种依恋类型：</p>
+        <table class="stage-tbl">
+          <thead><tr><th>依恋类型</th><th>典型表现</th></tr></thead>
+          <tbody>
+            <tr><td>安全型</td><td>把照料者当作探索的「安全基地」，分离时不安，重聚时易被安抚。约占多数。</td></tr>
+            <tr><td>回避型</td><td>对照料者的离开与返回都显得疏离、不在意。</td></tr>
+            <tr><td>矛盾/抵抗型</td><td>分离时极度焦虑，重聚时既寻求接触又愤怒抗拒，难以平复。</td></tr>
+            <tr><td>混乱型</td><td>后续研究补充，行为矛盾无序，常与创伤或不一致的养育相关。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- Kohlberg -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">05</span>
+        <span class="t-title"><h3>道德发展理论</h3><span class="t-person">LAWRENCE KOHLBERG · 劳伦斯·科尔伯格</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：在皮亚杰基础上，用两难道德故事（如「海因茨偷药」）研究人的道德推理，提出道德判断经历三个水平、六个阶段，其发展依据的是<b>推理的理由</b>而非结论本身。</p>
+        <table class="stage-tbl">
+          <thead><tr><th>水平</th><th>推理依据</th></tr></thead>
+          <tbody>
+            <tr><td>前习俗水平</td><td>着眼于避免惩罚与自身利益（「会不会被抓」「对我有什么好处」）。</td></tr>
+            <tr><td>习俗水平</td><td>着眼于获得他人认可、维护社会秩序与法律规则（「做个好人」「守法」）。</td></tr>
+            <tr><td>后习俗水平</td><td>着眼于社会契约与普遍伦理原则，能超越具体法律去追问正义。并非人人都能达到。</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.86rem;color:var(--sage);margin-top:16px">批评意见：吉利根（Gilligan）指出该理论偏重「公正取向」而忽视女性更常见的「关怀取向」；跨文化研究也质疑其阶段的普适性。</p>
+      </div>
+    </details>
+
+    <!-- Behaviorism -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">06</span>
+        <span class="t-title"><h3>行为主义与社会学习</h3><span class="t-person">WATSON · SKINNER · BANDURA</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：发展是<b>可观察行为</b>经由学习不断塑造的结果，强调环境的决定作用，反对研究看不见的内部心理过程（早期版本）。</p>
+        <p style="margin-top:16px;font-size:.94rem"><b style="color:var(--ink)">经典条件反射（巴甫洛夫、华生）</b>　通过刺激联结形成反应，如小艾伯特实验中习得的恐惧。</p>
+        <p style="margin-top:12px;font-size:.94rem"><b style="color:var(--ink)">操作性条件反射（斯金纳）</b>　行为的后果（强化与惩罚）决定该行为未来出现的概率。</p>
+        <p style="margin-top:12px;font-size:.94rem"><b style="color:var(--ink)">社会学习/社会认知理论（班杜拉）</b>　人还能通过<b>观察和模仿</b>他人来学习（波波玩偶实验），并涉及注意、记忆与自我效能等认知因素——这为行为主义补上了「思维」的维度。</p>
+      </div>
+    </details>
+
+    <!-- Bronfenbrenner -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">07</span>
+        <span class="t-title"><h3>生态系统理论</h3><span class="t-person">URIE BRONFENBRENNER · 布朗芬布伦纳</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：儿童的发展镶嵌在一系列<b>层层嵌套的环境系统</b>之中，从最贴近的家庭到最宏观的文化与时代，彼此相互作用，不能脱离环境孤立地理解一个人。</p>
+        <table class="stage-tbl">
+          <thead><tr><th>系统层级</th><th>含义</th></tr></thead>
+          <tbody>
+            <tr><td>微系统</td><td>个体直接接触的环境：家庭、学校、同伴、邻里。</td></tr>
+            <tr><td>中间系统</td><td>各微系统之间的联系，如家庭与学校的沟通。</td></tr>
+            <tr><td>外系统</td><td>个体不直接参与、却影响他的环境，如父母的工作单位、社区政策。</td></tr>
+            <tr><td>宏系统</td><td>更广的文化、价值观、法律与经济制度。</td></tr>
+            <tr><td>时间系统</td><td>贯穿以上所有层级的时间维度：人生重大事件、历史与社会变迁。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- Freud -->
+    <details class="theory reveal">
+      <summary>
+        <span class="t-idx">08</span>
+        <span class="t-title"><h3>心理性发展理论</h3><span class="t-person">SIGMUND FREUD · 西格蒙德·弗洛伊德</span></span>
+        <span class="t-chevron">+</span>
+      </summary>
+      <div class="theory-body">
+        <p class="core-concept">核心观点：作为最早的系统发展理论之一，弗洛伊德认为人格在童年经历五个「心理性阶段」，每阶段力比多（本能能量）集中于身体不同部位，若某阶段的需求受挫或过度满足，会形成「固着」影响成年人格。</p>
+        <p style="margin-top:16px;font-size:.94rem">五阶段依次为：<b style="color:var(--ink)">口唇期</b>（0–1岁）、<b style="color:var(--ink)">肛门期</b>（1–3岁）、<b style="color:var(--ink)">性器期</b>（3–6岁，含俄狄浦斯情结）、<b style="color:var(--ink)">潜伏期</b>（6岁—青春期）、<b style="color:var(--ink)">生殖期</b>（青春期起）。</p>
+        <p style="font-size:.86rem;color:var(--sage);margin-top:16px">现代评价：弗洛伊德的许多概念难以实证检验、样本偏狭，在当代实证发展心理学中已非主流；但他关于「早期经验重要」「无意识动机存在」的洞见具有深远的历史影响。</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ================= 发展的四大领域（复述强化） ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 — 分析维度</span>
+      <h2>发展在四条线上同时展开</h2>
+      <p>无论处于哪个年龄，任何一个人的发展都可以从这四个维度去观察。它们相互依赖——例如大脑成熟（生理）支撑记忆提升（认知），而稳定的依恋（社会情绪）又反过来促进探索与学习。</p>
+    </div>
+    <div class="domain-grid reveal">
+      <div class="domain-card">
+        <div class="dot" style="background:#D9A24E"></div>
+        <h3>生理</h3>
+        <p>身高体重、脑与神经、运动技能、感官、青春期与衰老等身体变化。</p>
+      </div>
+      <div class="domain-card">
+        <div class="dot" style="background:#B47B2F"></div>
+        <h3>认知</h3>
+        <p>注意、记忆、语言、推理、创造与智力，以及它们随年龄的成长与老化。</p>
+      </div>
+      <div class="domain-card">
+        <div class="dot" style="background:#4F7159"></div>
+        <h3>社会情绪</h3>
+        <p>依恋、气质、自我、人格、情绪调节、道德与人际关系的形成。</p>
+      </div>
+      <div class="domain-card">
+        <div class="dot" style="background:#1E2E24"></div>
+        <h3>语言</h3>
+        <p>语音、词汇、语法与语用能力的习得，认知与社会互动的交汇点。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 生命全程 ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">05 — 生命全程</span>
+      <h2>从受精卵到暮年</h2>
+      <p>毕生取向（life-span perspective）主张：发展不止于成年，而是贯穿一生、多方向（既有获得也有丧失）、并具可塑性的过程。以下为常用的阶段划分，年龄边界仅供参考。</p>
+    </div>
+    <div class="life-track reveal">
+      <div class="life-item">
+        <div class="life-age">产前期<span class="en">Prenatal</span></div>
+        <div class="life-body"><h3>受孕 — 出生</h3><p>历经胚种期、胚胎期、胎儿期。基础器官与神经系统迅速成形，对营养、药物、压力等环境因素（致畸因子）高度敏感。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">婴幼儿期<span class="en">Infancy</span></div>
+        <div class="life-body"><h3>0 — 2岁</h3><p>惊人的身体与脑发育；建立依恋；获得客体永久性、语言萌芽与基本运动能力。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">幼儿期<span class="en">Early Childhood</span></div>
+        <div class="life-body"><h3>2 — 6岁</h3><p>语言与想象力爆发，自我概念与性别认同出现，社会技能与情绪调节初步形成。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">童年中期<span class="en">Middle Childhood</span></div>
+        <div class="life-body"><h3>6 — 11岁</h3><p>逻辑思维与读写算能力发展，同伴关系与「勤奋感」成为核心，学业与规则意识增强。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">青春期<span class="en">Adolescence</span></div>
+        <div class="life-body"><h3>11 — 18岁</h3><p>青春期生理巨变，抽象思维成熟，自我同一性探索，独立性与同伴影响显著上升。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">成年早期<span class="en">Early Adulthood</span></div>
+        <div class="life-body"><h3>18 — 40岁</h3><p>亲密关系、职业建立与独立生活；体能与部分认知能力达到高峰。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">成年中期<span class="en">Middle Adulthood</span></div>
+        <div class="life-body"><h3>40 — 65岁</h3><p>事业与家庭责任并重，关注「传承与贡献」；身体渐变，经验性智慧增长。</p></div>
+      </div>
+      <div class="life-item">
+        <div class="life-age">成年晚期<span class="en">Late Adulthood</span></div>
+        <div class="life-body"><h3>65岁以上</h3><p>面对退休、健康与丧失，进行人生整合与意义回顾；情绪调节与幸福感常保持良好。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 研究方法 ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">06 — 如何研究「变化」</span>
+      <h2>研究方法</h2>
+      <p>研究「随时间的变化」有其独特的方法论难题。除通用的观察、实验、访谈等方法外，发展心理学发展出三种专门的设计来处理「年龄」这一变量。</p>
+    </div>
+    <div class="method-grid reveal">
+      <div class="method-card">
+        <span class="eyebrow">横断设计</span>
+        <h3>横断研究</h3>
+        <p>在<b>同一时间点</b>比较不同年龄的群体（如同时测量5岁、10岁、15岁儿童）。</p>
+        <p class="pm"><b>优点</b>快速、经济，能迅速勾勒年龄差异。</p>
+        <p class="pm"><b>局限</b>混入「世代效应」——年龄差异可能源于成长年代不同，而非发展本身。</p>
+      </div>
+      <div class="method-card">
+        <span class="eyebrow">纵向设计</span>
+        <h3>纵向研究</h3>
+        <p>对<b>同一批人</b>在多个时间点反复追踪测量（如从5岁跟到15岁）。</p>
+        <p class="pm"><b>优点</b>能直接观察个体内的真实变化与发展轨迹。</p>
+        <p class="pm"><b>局限</b>耗时昂贵，存在被试流失、反复测试的练习效应。</p>
+      </div>
+      <div class="method-card">
+        <span class="eyebrow">序列设计</span>
+        <h3>聚合交叉/序列研究</h3>
+        <p>将横断与纵向<b>结合</b>：同时追踪多个不同年龄的群体一段时间。</p>
+        <p class="pm"><b>优点</b>能分离年龄效应与世代效应，兼顾效率。</p>
+        <p class="pm"><b>局限</b>设计与分析更复杂，成本仍较高。</p>
+      </div>
+    </div>
+    <p style="margin-top:26px;font-size:.9rem;color:var(--ink-soft);max-width:52em" class="reveal">此外，<b style="color:var(--ink)">双生子研究</b>与<b style="color:var(--ink)">收养研究</b>是分离「先天—后天」贡献的经典工具；<b style="color:var(--ink)">脑成像</b>等技术则让研究者得以观察神经层面的发展变化。</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <span class="eyebrow">关于这份导论</span>
+    <p>本页覆盖了发展心理学的学科定位、核心争论、主要理论、发展领域、生命全程与研究方法，属于框架性的入门梳理，力求呈现学界的一般共识与主要分歧，而非某一学派的定论。</p>
+    <p class="caveat">
+      注意：文中的年龄区间、阶段划分均为参考性的一般模型，个体差异与文化差异普遍存在。<br>
+      经典理论（如皮亚杰、弗洛伊德、科尔伯格）虽影响深远，但都受到过后续实证研究的修正与批评，不应视为无误的事实。<br>
+      如需深入，建议查阅权威教材（如 Berk、Santrock、Feldman 的《发展心理学》）与同行评审文献进行核对。
+    </p>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(e){e.classList.add('in')});
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>

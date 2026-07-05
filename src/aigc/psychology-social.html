@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社会心理学 · 个体与他人之间的科学</title>
+<style>
+:root{
+  --paper:#F6F7F5;
+  --ink:#161F2C;
+  --muted:#5C6672;
+  --cobalt:#2447C9;
+  --coral:#E4572E;
+  --line:#DCE1E7;
+  --card:#FFFFFF;
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"PingFang SC","Microsoft YaHei","Noto Sans SC",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.85;
+  font-size:16px;
+}
+::selection{background:var(--cobalt);color:#fff;}
+
+/* ---------- 顶部导航 ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,247,245,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1080px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;height:56px;
+}
+.nav-brand{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.06em;}
+.nav-brand em{font-style:normal;color:var(--coral);}
+.nav-links{display:flex;gap:22px;font-size:13.5px;}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--cobalt);}
+.nav-links a:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px;}
+@media(max-width:760px){.nav-links{display:none;}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
+.hero-inner{
+  position:relative;max-width:1080px;margin:0 auto;
+  padding:110px 24px 96px;
+}
+.eyebrow{
+  font-size:12.5px;letter-spacing:.28em;color:var(--cobalt);
+  text-transform:uppercase;margin-bottom:22px;font-weight:600;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(42px,7vw,76px);line-height:1.15;letter-spacing:.02em;
+}
+.hero h1 .accent{color:var(--coral);}
+.hero-def{
+  margin-top:30px;max-width:560px;font-size:17.5px;color:var(--muted);
+}
+.hero-def strong{color:var(--ink);}
+.hero-src{margin-top:14px;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+.hero-hint{
+  margin-top:44px;display:inline-flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--muted);
+}
+.hero-hint .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);}
+
+/* ---------- 布局 ---------- */
+.section{max-width:1080px;margin:0 auto;padding:88px 24px 0;}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px;}
+.sec-num{
+  font-family:var(--serif);font-size:15px;color:var(--coral);
+  letter-spacing:.1em;white-space:nowrap;
+}
+.sec-head h2{
+  font-family:var(--serif);font-weight:800;font-size:clamp(26px,4vw,36px);
+  letter-spacing:.03em;
+}
+.lead{max-width:720px;font-size:16.5px;color:var(--ink);}
+.lead + .lead{margin-top:16px;}
+.note{
+  margin-top:22px;max-width:720px;padding:16px 20px;
+  border-left:3px solid var(--cobalt);background:var(--card);
+  font-size:14.5px;color:var(--muted);
+}
+.note strong{color:var(--ink);}
+
+/* Lewin 公式 */
+.formula{
+  margin:36px 0 0;padding:34px 28px;background:var(--ink);color:#fff;
+  border-radius:6px;max-width:720px;
+}
+.formula .f{
+  font-family:var(--serif);font-size:clamp(22px,3.4vw,30px);letter-spacing:.08em;
+}
+.formula .f b{color:#FF8A5C;}
+.formula p{margin-top:12px;font-size:14px;color:#B9C2CE;line-height:1.8;}
+
+/* ---------- 历史时间线 ---------- */
+.timeline{margin-top:10px;position:relative;padding-left:26px;max-width:760px;}
+.timeline::before{
+  content:"";position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--line);
+}
+.t-item{position:relative;padding:0 0 34px 22px;}
+.t-item::before{
+  content:"";position:absolute;left:-24px;top:9px;width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--cobalt);
+}
+.t-item.warn::before{border-color:var(--coral);}
+.t-year{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:.04em;}
+.t-year span{font-size:13px;color:var(--muted);font-weight:400;margin-left:10px;letter-spacing:0;}
+.t-item p{margin-top:6px;font-size:15px;color:var(--muted);max-width:640px;}
+
+/* ---------- 核心概念卡片 ---------- */
+.grid{
+  margin-top:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+}
+@media(max-width:820px){.grid{grid-template-columns:1fr;}}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:26px 26px 24px;transition:transform .25s,box-shadow .25s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(22,31,44,.08);}
+.card h3{
+  font-family:var(--serif);font-size:19px;font-weight:800;letter-spacing:.03em;
+  display:flex;align-items:center;gap:10px;
+}
+.card h3 .mark{width:9px;height:9px;border-radius:50%;background:var(--cobalt);flex:none;}
+.card .en{font-size:12px;color:var(--muted);letter-spacing:.08em;margin:4px 0 12px;text-transform:uppercase;}
+.card p{font-size:14.5px;color:var(--muted);}
+.card .kw{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
+.kw span{
+  font-size:12px;color:var(--cobalt);border:1px solid #C6D0F2;background:#EEF1FC;
+  padding:2px 10px;border-radius:999px;
+}
+
+/* ---------- 经典实验 ---------- */
+.exp-list{margin-top:8px;display:flex;flex-direction:column;gap:16px;}
+.exp{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  display:grid;grid-template-columns:120px 1fr;overflow:hidden;
+}
+@media(max-width:680px){.exp{grid-template-columns:1fr;}}
+.exp-year{
+  background:var(--ink);color:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:20px 10px;gap:4px;
+}
+.exp-year b{font-family:var(--serif);font-size:24px;letter-spacing:.05em;}
+.exp-year i{font-style:normal;font-size:11.5px;color:#9AA5B3;letter-spacing:.05em;text-align:center;}
+.exp-body{padding:22px 26px;}
+.exp-body h3{font-family:var(--serif);font-size:18px;font-weight:800;letter-spacing:.02em;}
+.exp-body .finding{
+  display:inline-block;margin:8px 0 10px;font-size:12.5px;color:var(--coral);
+  border:1px solid #F3C4B2;background:#FCEFE9;padding:2px 12px;border-radius:999px;
+}
+.exp-body p{font-size:14.5px;color:var(--muted);}
+.exp-body .caveat{
+  margin-top:10px;font-size:13px;color:var(--muted);
+  border-top:1px dashed var(--line);padding-top:10px;
+}
+.exp-body .caveat b{color:var(--coral);}
+
+/* ---------- 研究方法表 ---------- */
+.methods{margin-top:8px;overflow-x:auto;}
+.methods table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:14.5px;min-width:640px;}
+.methods th{
+  text-align:left;font-family:var(--serif);font-size:15px;letter-spacing:.04em;
+  padding:14px 18px;border-bottom:2px solid var(--ink);background:#FBFBFA;
+}
+.methods td{padding:14px 18px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top;}
+.methods td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;}
+.methods tr:last-child td{border-bottom:none;}
+
+/* ---------- 应用 ---------- */
+.apps{margin-top:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card);}
+@media(max-width:820px){.apps{grid-template-columns:1fr;}}
+.app{padding:28px;border-bottom:1px solid var(--line);}
+.app:nth-child(odd){border-right:1px solid var(--line);}
+@media(max-width:820px){.app:nth-child(odd){border-right:none;}}
+.app:nth-last-child(-n+2){border-bottom:none;}
+@media(max-width:820px){.app:nth-last-child(2){border-bottom:1px solid var(--line);}}
+.app h3{font-family:var(--serif);font-size:17px;font-weight:800;margin-bottom:8px;}
+.app p{font-size:14.5px;color:var(--muted);}
+
+/* ---------- 书单 ---------- */
+.books{margin-top:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:820px){.books{grid-template-columns:1fr;}}
+.book{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px 24px;}
+.book h3{font-family:var(--serif);font-size:16.5px;font-weight:800;}
+.book .author{font-size:13px;color:var(--cobalt);margin:4px 0 8px;}
+.book p{font-size:14px;color:var(--muted);}
+
+/* ---------- 页脚 ---------- */
+footer{margin-top:100px;border-top:1px solid var(--line);background:var(--card);}
+.footer-inner{max-width:1080px;margin:0 auto;padding:36px 24px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+/* 滚动渐显 */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">社会心理学<em>.</em></div>
+    <div class="nav-links">
+      <a href="#define">定义</a>
+      <a href="#history">简史</a>
+      <a href="#concepts">核心概念</a>
+      <a href="#experiments">经典实验</a>
+      <a href="#methods">研究方法</a>
+      <a href="#apply">应用</a>
+      <a href="#books">延伸阅读</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas class="hero-canvas" id="dots" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">Social Psychology</div>
+    <h1>没有人是<br>一座<span class="accent">孤岛</span></h1>
+    <p class="hero-def">社会心理学是一门科学,研究<strong>个体的思想、情感与行为,如何受到他人真实的、想象的或隐含的存在的影响</strong>。它关心的不是"人性本来如何",而是"人在他人面前会变成什么样"。</p>
+    <p class="hero-src">—— 定义改述自 Gordon Allport(1954)</p>
+    <div class="hero-hint"><span class="dot"></span>背景中那颗橙色的点,是每个群体里"不一样"的个体</div>
+  </div>
+</header>
+
+<!-- ========== 01 定义 ========== -->
+<section class="section" id="define">
+  <div class="sec-head reveal"><span class="sec-num">01</span><h2>它研究什么,不研究什么</h2></div>
+  <p class="lead reveal">社会心理学位于心理学与社会学的交界处,但它的分析单位始终是<b>个体</b>。它想回答的问题包括:为什么明知答案错误,人还会跟着多数人说错?为什么普通人会服从命令伤害他人?为什么现场的人越多,反而越没有人伸出援手?为什么我们对"自己人"更宽容、对"外人"更苛刻?</p>
+  <p class="lead reveal">与相邻学科相比,它的边界是清晰的:<b>人格心理学</b>强调稳定的个体差异("他是什么样的人"),社会心理学强调情境的力量("什么样的处境会让几乎所有人都这样做");<b>社会学</b>研究群体与制度本身,社会心理学研究群体如何进入个体的头脑。</p>
+  <div class="formula reveal">
+    <div class="f">B = f ( <b>P</b> , <b>E</b> )</div>
+    <p>库尔特·勒温(Kurt Lewin)的著名公式:行为(Behavior)是个人(Person)与环境(Environment)共同作用的函数。这被视为社会心理学的纲领——不看清情境,就无法理解行为。勒温也因此常被称为"现代社会心理学之父"。</p>
+  </div>
+  <div class="note reveal"><strong>一个反直觉的核心立场:</strong>普通人系统性地低估情境的力量、高估个人性格的作用——这本身就是社会心理学的一个著名发现,叫"基本归因错误"。可以说,这门学科的许多经典研究,都是在一次次演示"情境比你想象的强大得多"。</div>
+</section>
+
+<!-- ========== 02 简史 ========== -->
+<section class="section" id="history">
+  <div class="sec-head reveal"><span class="sec-num">02</span><h2>一门年轻学科的简史</h2></div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-year">1898<span>特里普利特的骑行实验</span></div>
+      <p>Norman Triplett 注意到自行车选手在有人同行时骑得更快,并用实验验证了"他人在场提升绩效"——通常被视为第一项社会心理学实验(社会助长效应的雏形)。</p>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year">1908<span>学科教科书诞生</span></div>
+      <p>心理学家 William McDougall 与社会学家 E. A. Ross 各自出版了以"社会心理学"命名的教科书,学科正式得名——从出生起它就横跨两个学科。</p>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year">1930s–40s<span>战争塑造议题</span></div>
+      <p>纳粹兴起与二战迫使学界追问:宣传如何说服大众?普通人为何参与暴行?勒温等流亡学者把"群体动力学""态度改变"变成核心议题,战争研究(如士兵士气)催生了大量方法。</p>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year">1950s–70s<span>经典实验的黄金时代</span></div>
+      <p>阿希的从众实验、费斯廷格的认知失调理论、米尔格拉姆的服从实验、达利与拉塔内的旁观者研究相继问世。这些研究戏剧性强、结论震撼,奠定了学科的公众形象。</p>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year">1980s–2000s<span>认知革命与文化转向</span></div>
+      <p>"社会认知"范式兴起:用信息加工的语言研究刻板印象、内隐态度、双重加工(直觉 vs 深思)。跨文化研究则揭示,许多"普遍规律"在集体主义文化中表现不同。</p>
+    </div>
+    <div class="t-item warn reveal">
+      <div class="t-year">2010s 至今<span>可重复性危机与自我修正</span></div>
+      <p>大规模重复研究发现,相当一部分经典效应(如自我损耗、部分启动效应)难以稳定重现。学科随之推行预注册、开放数据、大样本协作——这是一场仍在进行的方法学革新。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 03 核心概念 ========== -->
+<section class="section" id="concepts">
+  <div class="sec-head reveal"><span class="sec-num">03</span><h2>八个核心研究领域</h2></div>
+  <div class="grid">
+    <div class="card reveal">
+      <h3><span class="mark"></span>社会认知</h3>
+      <div class="en">Social Cognition</div>
+      <p>人如何感知、解释和记忆社会信息。我们依赖图式与启发式快速判断他人,因此高效但常出错:把行为归因于性格而忽视处境(基本归因错误),对自己却宽容得多(行动者—观察者差异)。</p>
+      <div class="kw"><span>图式</span><span>启发式</span><span>归因理论</span><span>基本归因错误</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>自我</h3>
+      <div class="en">The Self</div>
+      <p>自我概念很大程度上是社会的产物:我们通过与他人比较来认识自己(社会比较理论),把成功归于自己、失败归于外界(自我服务偏差),并高估别人对我们的关注程度(聚光灯效应)。</p>
+      <div class="kw"><span>社会比较</span><span>自尊</span><span>自我服务偏差</span><span>聚光灯效应</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>态度与说服</h3>
+      <div class="en">Attitudes &amp; Persuasion</div>
+      <p>态度并不总能预测行为,行为反而会反过来塑造态度:当行为与信念冲突时,人会改变信念以消除不适(认知失调)。说服则走两条路:仔细权衡论据的中心路径,或依赖专家光环、颜值等线索的外周路径。</p>
+      <div class="kw"><span>认知失调</span><span>精细加工可能性模型</span><span>登门槛效应</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>社会影响</h3>
+      <div class="en">Social Influence</div>
+      <p>他人如何改变我们的行为:从众(为了正确或为了被接纳而跟随多数)、顺从(答应他人请求)、服从(听从权威指令)。信息性影响让我们"以为别人是对的",规范性影响让我们"不敢不一样"。</p>
+      <div class="kw"><span>从众</span><span>服从权威</span><span>规范性影响</span><span>信息性影响</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>群体过程</h3>
+      <div class="en">Group Processes</div>
+      <p>群体不是个体的简单相加:他人在场让简单任务更好、复杂任务更糟(社会助长);集体劳动让人偷懒(社会懈怠);讨论让立场更极端(群体极化);追求一致让决策失智(群体思维);匿名让人失控(去个体化)。</p>
+      <div class="kw"><span>社会助长</span><span>社会懈怠</span><span>群体极化</span><span>群体思维</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>刻板印象、偏见与歧视</h3>
+      <div class="en">Stereotypes, Prejudice &amp; Discrimination</div>
+      <p>只需把人随机分成"我们"与"他们",偏袒就会出现(最简群体范式)。社会认同理论认为,人从所属群体获取自尊,因而抬高内群体、贬低外群体。在适当条件下的群际接触,是目前证据最多的消减偏见途径之一。</p>
+      <div class="kw"><span>社会认同理论</span><span>内隐偏见</span><span>接触假说</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>亲社会行为与攻击</h3>
+      <div class="en">Helping &amp; Aggression</div>
+      <p>人何时助人、何时伤人?旁观者越多,每个人感到的责任越小(责任分散),援手反而越少。攻击则受挫折、去个体化、暴力线索与文化规范共同影响——情境同样比"天性"解释得更多。</p>
+      <div class="kw"><span>旁观者效应</span><span>责任分散</span><span>挫折—攻击假说</span></div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="mark"></span>人际吸引与亲密关系</h3>
+      <div class="en">Attraction &amp; Relationships</div>
+      <p>我们喜欢谁,规律出奇地朴素:住得近(接近性)、见得多(单纯曝光效应)、彼此像(相似性)、对方也喜欢我(互惠)。"互补相吸"的浪漫想象,在数据面前的支持其实相当有限。</p>
+      <div class="kw"><span>接近性</span><span>曝光效应</span><span>相似性</span><span>依恋理论</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 04 经典实验 ========== -->
+<section class="section" id="experiments">
+  <div class="sec-head reveal"><span class="sec-num">04</span><h2>改变学科的经典实验</h2></div>
+  <p class="lead reveal" style="margin-bottom:26px">按时间顺序排列。它们之所以经典,不只因为结论惊人,更因为它们把"情境的力量"变成了可以测量的东西。其中一些的方法与伦理在今天备受争议——争议本身也是学科史的一部分。</p>
+  <div class="exp-list">
+    <div class="exp reveal">
+      <div class="exp-year"><b>1936</b><i>谢里夫<br>游动错觉实验</i></div>
+      <div class="exp-body">
+        <h3>规范是如何在群体中"长出来"的</h3>
+        <span class="finding">发现:群体会自发收敛出共同标准</span>
+        <p>黑暗中静止的光点看起来会移动(游动错觉),移动距离本无客观答案。Muzafer Sherif 让被试先单独估计、再一起估计——各自的判断迅速汇聚成一个群体规范,且离开群体后仍持续影响个人判断。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1951</b><i>阿希<br>从众实验</i></div>
+      <div class="exp-body">
+        <h3>面对显而易见的错误,你敢说真话吗</h3>
+        <span class="finding">发现:约 75% 的人至少从众一次</span>
+        <p>Solomon Asch 让真被试与一群假被试比较线段长短。当所有"托儿"齐声给出明显错误的答案时,约三分之一的关键回答发生从众,约四分之三的被试至少跟错一次。只要出现一个持异议的同伴,从众率就大幅下降——异见者的存在本身就是解药。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1959</b><i>费斯廷格<br>认知失调实验</i></div>
+      <div class="exp-body">
+        <h3>1 美元让人真心说谎</h3>
+        <span class="finding">发现:报酬越少,态度改变越大</span>
+        <p>被试完成极其无聊的任务后,被要求告诉下一个人"任务很有趣",报酬为 1 美元或 20 美元。结果拿 1 美元的人事后更相信任务真的有趣——因为微薄报酬不足以为说谎开脱,只能改变自己的态度来消除失调。这一结果直接挑战了当时占主导的行为主义预测。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1961</b><i>米尔格拉姆<br>服从实验</i></div>
+      <div class="exp-body">
+        <h3>普通人能把电压加到多少伏</h3>
+        <span class="finding">发现:约 65% 的人按到了最高档 450 伏</span>
+        <p>Stanley Milgram 让被试充当"教师",在实验者指令下对答错题的"学生"(演员,并未真正受电击)施加逐级升高的电击。尽管听到惨叫与抗议,约三分之二的普通人仍在权威的口头催促下按到了标着危险的最高电压。实验揭示:服从不需要恶人,只需要一个看似合法的权威结构。</p>
+        <p class="caveat"><b>争议:</b>对被试造成了严重心理压力,直接推动了现代研究伦理审查制度的建立;后来的档案研究也对实验者是否严格照本宣科提出质疑。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1968</b><i>达利 &amp; 拉塔内<br>旁观者实验</i></div>
+      <div class="exp-body">
+        <h3>为什么人多的地方反而没人救你</h3>
+        <span class="finding">发现:旁观者越多,施助率越低</span>
+        <p>受 1964 年 Kitty Genovese 谋杀案报道触发(该报道细节后来被证实有夸大),John Darley 与 Bibb Latané 用实验证明:当被试以为还有他人在场时,对突发癫痫"求救"的反应显著变慢、变少。帮助行为需要连闯五关:注意到、判断为紧急、感到有责任、知道怎么做、决定行动——人多恰恰稀释了第三关的责任感。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1971</b><i>塔杰菲尔<br>最简群体实验</i></div>
+      <div class="exp-body">
+        <h3>制造偏见,只需要抛一枚硬币</h3>
+        <span class="finding">发现:随机分组即可引发内群体偏袒</span>
+        <p>Henri Tajfel 按毫无意义的标准(如对某幅画的偏好、甚至随机)把人分成两组。仅仅"知道自己属于哪组",人们分配奖励时就开始偏袒同组、甚至宁可己方少拿也要拉开与外组的差距。这成为社会认同理论的实验基石。</p>
+      </div>
+    </div>
+    <div class="exp reveal">
+      <div class="exp-year"><b>1971</b><i>津巴多<br>斯坦福监狱实验</i></div>
+      <div class="exp-body">
+        <h3>角色能在六天内吞噬一个人吗</h3>
+        <span class="finding">影响巨大,但证据地位存疑</span>
+        <p>Philip Zimbardo 将大学生随机分为"狱警"与"囚犯",模拟监狱在六天内失控,"狱警"出现羞辱与虐待行为,实验被迫提前终止。它长期被用来说明"角色与情境可以压倒人格"。</p>
+        <p class="caveat"><b>争议:</b>后续披露的录音与访谈显示,实验者曾主动引导狱警"表现强硬",部分被试称在表演;样本极小、无法重复。今天多数教科书将其作为方法论与伦理的反面教材来讲授,而非可靠证据。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 05 研究方法 ========== -->
+<section class="section" id="methods">
+  <div class="sec-head reveal"><span class="sec-num">05</span><h2>它如何得出结论</h2></div>
+  <div class="methods reveal">
+    <table>
+      <tr><th>方法</th><th>做法</th><th>优势</th><th>局限</th></tr>
+      <tr><td>实验法</td><td>随机分组,操纵自变量,观察因变量(多在实验室,也有现场实验)</td><td>唯一能确立因果关系的方法,是学科的主力</td><td>情境人为、样本常为大学生,外部效度受限</td></tr>
+      <tr><td>相关法</td><td>测量变量间的自然关联,如问卷、大数据</td><td>可研究无法操纵的变量(收入、婚姻、灾难)</td><td>相关不等于因果,存在第三变量问题</td></tr>
+      <tr><td>观察法</td><td>在自然情境中系统记录行为</td><td>真实、生态效度高</td><td>无法控制变量,观察者可能影响被观察者</td></tr>
+      <tr><td>调查法</td><td>抽样访问态度与自我报告</td><td>快速覆盖大样本</td><td>受措辞、社会赞许性、抽样偏差影响</td></tr>
+      <tr><td>元分析</td><td>统计合并众多研究的结果</td><td>估计效应的真实大小与稳定性</td><td>受发表偏倚("抽屉里的阴性结果")影响</td></tr>
+    </table>
+  </div>
+  <div class="note reveal"><strong>两个必须知道的关键词:</strong>其一是<strong>伦理审查</strong>——知情同意、最小伤害、事后说明,正是米尔格拉姆式研究的教训催生了这些制度;其二是<strong>可重复性</strong>——2015 年一项大型项目重复了 100 项心理学研究,只有不到四成得到显著的同向结果,社会心理学是重灾区之一。阅读任何"惊人的心理学效应"时,先问一句:它被大样本重复过吗?</div>
+</section>
+
+<!-- ========== 06 应用 ========== -->
+<section class="section" id="apply">
+  <div class="sec-head reveal"><span class="sec-num">06</span><h2>它在现实中被用在哪里</h2></div>
+  <div class="apps reveal">
+    <div class="app"><h3>公共政策与助推</h3><p>把器官捐献从"主动加入"改为"默认加入"、在税单上写"九成邻居已按时缴税"——利用默认选项与社会规范的"助推"(nudge)已被多国政府设立专门团队采用,效果与争议并存。</p></div>
+    <div class="app"><h3>市场营销与说服</h3><p>稀缺("仅剩 3 件")、社会证明("10 万人已购买")、互惠(免费试用)、承诺一致(先答应小请求)——商业说服技术几乎是社会影响研究的直接应用,理解它也是抵御它的第一步。</p></div>
+    <div class="app"><h3>法律与司法</h3><p>目击证人记忆为何不可靠、审讯情境如何诱发虚假供述、陪审团讨论中的群体极化——社会心理学证据已实际推动了列队辨认程序与审讯规范的改革。</p></div>
+    <div class="app"><h3>健康与临床</h3><p>孤独感对死亡风险的影响可与吸烟相提并论;改变"同龄人都在喝酒"的错误规范认知,能降低校园酗酒;认知失调被用于戒烟与行为改变干预。</p></div>
+    <div class="app"><h3>组织与管理</h3><p>群体思维如何搞砸重大决策(挑战者号事故是常用案例)、社会懈怠如何拖垮团队、程序公正感为何比加薪更能留住人——组织行为学的大量根基来自社会心理学。</p></div>
+    <div class="app"><h3>网络与算法社会</h3><p>推荐算法放大群体极化、点赞机制利用社会认同、匿名性催化去个体化的网络攻击——经典理论在社交媒体时代获得了新的、也更紧迫的检验场。</p></div>
+  </div>
+</section>
+
+<!-- ========== 07 书单 ========== -->
+<section class="section" id="books">
+  <div class="sec-head reveal"><span class="sec-num">07</span><h2>延伸阅读</h2></div>
+  <div class="books">
+    <div class="book reveal"><h3>《社会性动物》</h3><div class="author">Elliot Aronson</div><p>最负盛名的社会心理学入门读物,以叙事而非教科书体例写成,再版数十年长销不衰。</p></div>
+    <div class="book reveal"><h3>《社会心理学》(教材)</h3><div class="author">David Myers &amp; Jean Twenge</div><p>全球使用最广的标准教材之一,体系完整、证据更新及时,适合系统学习。</p></div>
+    <div class="book reveal"><h3>《影响力》</h3><div class="author">Robert Cialdini</div><p>把顺从与说服研究提炼为互惠、承诺、社会认同、喜好、权威、稀缺等原则,应用取向的经典。</p></div>
+    <div class="book reveal"><h3>《思考,快与慢》</h3><div class="author">Daniel Kahneman</div><p>虽属判断与决策领域,但双系统框架与启发式研究是理解社会认知不可绕开的基础。书中部分启动效应研究已受重复性质疑,阅读时可留意。</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>社会心理学 · 一页导览 — 供学习参考,内容为领域共识性介绍</span>
+    <span>B = f ( P , E )</span>
+  </div>
+</footer>
+
+<script>
+/* ---- 滚动渐显 ---- */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---- 导航高亮 ---- */
+const links=[...document.querySelectorAll('.nav-links a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const i=secs.indexOf(e.target);links.forEach(l=>l.classList.remove('active'));if(i>-1)links[i].classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s=>s&&io2.observe(s));
+
+/* ---- Hero 点阵:群体缓慢聚拢,一颗橙点保持独立 ---- */
+(function(){
+  const cv=document.getElementById('dots'),ctx=cv.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,dots=[],t=0;
+  function resize(){W=cv.width=cv.offsetWidth*devicePixelRatio;H=cv.height=cv.offsetHeight*devicePixelRatio;init();}
+  function init(){
+    dots=[];const n=Math.min(90,Math.floor(W*H/22000));
+    for(let i=0;i<n;i++){dots.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25*devicePixelRatio,vy:(Math.random()-.5)*.25*devicePixelRatio,r:(Math.random()*1.6+1.1)*devicePixelRatio,deviant:i===0});}
+  }
+  function step(){
+    ctx.clearRect(0,0,W,H);t+=0.004;
+    const cx=W*(0.68+0.06*Math.sin(t)),cy=H*(0.45+0.08*Math.cos(t*0.8));
+    for(const d of dots){
+      if(!reduce){
+        if(d.deviant){d.vx-= (cx-d.x)*0.0000012*devicePixelRatio; d.vy-=(cy-d.y)*0.0000012*devicePixelRatio;}
+        else{d.vx+=(cx-d.x)*0.0000018*devicePixelRatio; d.vy+=(cy-d.y)*0.0000018*devicePixelRatio;}
+        d.vx*=0.995;d.vy*=0.995;d.x+=d.vx;d.y+=d.vy;
+        if(d.x<0||d.x>W)d.vx*=-1;if(d.y<0||d.y>H)d.vy*=-1;
+      }
+      ctx.beginPath();ctx.arc(d.x,d.y,d.deviant?d.r*2.2:d.r,0,Math.PI*2);
+      ctx.fillStyle=d.deviant?'#E4572E':'rgba(36,71,201,0.30)';ctx.fill();
+    }
+    /* 邻近连线,表现"关系" */
+    ctx.strokeStyle='rgba(36,71,201,0.07)';ctx.lineWidth=1;
+    for(let i=0;i<dots.length;i++)for(let j=i+1;j<dots.length;j++){
+      const a=dots[i],b=dots[j],dx=a.x-b.x,dy=a.y-b.y,dist=dx*dx+dy*dy,max=(90*devicePixelRatio)**2;
+      if(dist<max){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+    }
+    if(!reduce)requestAnimationFrame(step);
+  }
+  window.addEventListener('resize',resize);resize();step();
+})();
+</script>
+</body>
+</html>
