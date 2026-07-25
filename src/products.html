@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+    <title>Products - Junjie</title>
+    <link rel="shortcut icon" type="image/png" href="assets/avatar.jpg" />
+    <link rel="canonical" href="https://ioriens.com/products" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Products by Junjie: Auto Window Arranger and Obsidian Links."
+    />
+    <meta name="author" content="Junjie" />
+    <meta name="theme-color" content="#ece8df" />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f0e8;
+        --panel: rgba(255, 252, 246, 0.72);
+        --line: rgba(56, 45, 31, 0.14);
+        --text: #1f1a17;
+        --muted: #62584f;
+        --accent: #176b5a;
+        --accent-strong: #0f5144;
+        --shadow: 0 20px 50px rgba(42, 31, 18, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(209, 219, 199, 0.7), transparent 30%),
+          radial-gradient(circle at right 20%, rgba(214, 198, 170, 0.55), transparent 24%),
+          var(--bg);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: min(1040px, 100%);
+        margin: 0 auto;
+        padding: clamp(24px, 5vw, 56px) clamp(18px, 5vw, 48px)
+          clamp(40px, 8vw, 72px);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        background: var(--panel);
+        transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+      }
+
+      .back-link:hover,
+      .back-link:focus-visible {
+        color: var(--accent);
+        border-color: rgba(23, 107, 90, 0.32);
+        transform: translateY(-1px);
+      }
+
+      .hero {
+        display: grid;
+        gap: 16px;
+        max-width: 42rem;
+        margin: clamp(28px, 6vw, 56px) 0 clamp(36px, 7vw, 68px);
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        letter-spacing: -0.04em;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 8vw, 5.2rem);
+        line-height: 0.96;
+      }
+
+      .summary,
+      .product-description {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .summary {
+        max-width: 36rem;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+      }
+
+      .product-list {
+        display: grid;
+        gap: clamp(28px, 6vw, 52px);
+      }
+
+      .product {
+        display: grid;
+        grid-template-columns: minmax(150px, 0.38fr) minmax(0, 1fr);
+        gap: clamp(24px, 5vw, 52px);
+        align-items: center;
+        padding: clamp(22px, 4vw, 36px) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .product:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .product-image {
+        display: block;
+        width: min(100%, 240px);
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 26px;
+        box-shadow: var(--shadow);
+      }
+
+      .product-copy {
+        display: grid;
+        gap: 14px;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        line-height: 1;
+      }
+
+      .product-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        margin-top: 4px;
+      }
+
+      .product-links a {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-color: rgba(23, 107, 90, 0.3);
+        text-underline-offset: 4px;
+      }
+
+      .product-links a:hover,
+      .product-links a:focus-visible {
+        color: var(--accent-strong);
+      }
+
+      .footer-note {
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #171a18;
+          --panel: rgba(35, 42, 38, 0.82);
+          --line: rgba(224, 231, 220, 0.16);
+          --text: #f0eee7;
+          --muted: #b8beb4;
+          --accent: #83d2ba;
+          --accent-strong: #a6e5d1;
+          --shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+        }
+
+        body {
+          background:
+            radial-gradient(circle at top left, rgba(47, 77, 64, 0.45), transparent 30%),
+            radial-gradient(circle at right 20%, rgba(78, 65, 42, 0.32), transparent 24%),
+            var(--bg);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .product {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .product-image {
+          width: min(100%, 220px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <a class="back-link" href="index.html">Back home</a>
+
+      <header class="hero">
+        <p class="eyebrow">Products</p>
+        <h1>Tools I make</h1>
+        <p class="summary">
+          A small collection of products and utilities built by Junjie.
+        </p>
+      </header>
+
+      <main class="product-list" aria-label="Products by Junjie">
+        <article class="product">
+          <img
+            class="product-image"
+            src="assets/products/auto-window-arranger.png"
+            alt="Auto Window Arranger app icon"
+            width="1024"
+            height="1024"
+          />
+          <div class="product-copy">
+            <p class="eyebrow">macOS utility</p>
+            <h2>Auto Window Arranger</h2>
+            <p class="product-description">
+              A menu bar macOS app for bringing selected app windows forward and arranging them into a layout.
+            </p>
+            <nav class="product-links" aria-label="Auto Window Arranger links">
+              <a href="https://junjie.xyz/auto-window-arranger/" target="_blank" rel="noreferrer">Website</a>
+              <a href="https://github.com/junjie-xyz/auto-window-arranger/releases" target="_blank" rel="noreferrer">Download</a>
+              <a href="https://github.com/junjie-xyz/auto-window-arranger" target="_blank" rel="noreferrer">Website source</a>
+            </nav>
+          </div>
+        </article>
+
+        <article class="product">
+          <img
+            class="product-image"
+            src="assets/products/obsidian-links.png"
+            alt="Obsidian Links app icon"
+            width="512"
+            height="512"
+          />
+          <div class="product-copy">
+            <p class="eyebrow">Obsidian tool</p>
+            <h2>Obsidian Links</h2>
+            <p class="product-description">
+              Static HTTPS gateway and link generator for supported obsidian:// URIs.
+            </p>
+            <nav class="product-links" aria-label="Obsidian Links links">
+              <a href="https://obsidian-links.junjie.xyz/" target="_blank" rel="noreferrer">Website</a>
+              <a href="https://ob.junjie.xyz/" target="_blank" rel="noreferrer">Alternate site</a>
+              <a href="https://github.com/junjie-xyz/obsidian-links" target="_blank" rel="noreferrer">Source</a>
+            </nav>
+          </div>
+        </article>
+      </main>
+
+      <p class="footer-note"><a href="index.html">← Junjie home</a></p>
+    </div>
+  </body>
+</html>
