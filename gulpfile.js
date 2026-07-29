@@ -98,11 +98,16 @@ function assets() {
     .pipe(gulp.dest('assets'))
 }
 
+function sitemap() {
+  return gulp.src('./src/sitemap.xml').pipe(gulp.dest('.'))
+}
+
 
 exports.html = html
 exports.json = json
 exports.assets = assets
-exports.dev = gulp.series(html, json, assets, function () {
+exports.sitemap = sitemap
+exports.dev = gulp.series(html, json, assets, sitemap, function () {
   browserSync.init({
     server: './'
   })
@@ -110,4 +115,4 @@ exports.dev = gulp.series(html, json, assets, function () {
   gulp.watch('src/*.json', json)
 })
 
-exports.default = exports.build = gulp.parallel(html, json, assets)
+exports.default = exports.build = gulp.parallel(html, json, assets, sitemap)
